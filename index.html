@@ -74,7 +74,6 @@
 </head>
 <body class="bg-slate-50 text-slate-800 dark:bg-slate-950 dark:text-slate-100 min-h-screen transition-colors duration-300 font-sans">
 
-    <!-- Navigation Bar -->
     <nav class="sticky top-0 z-40 w-full glass border-b border-slate-200/50 dark:border-slate-800/50 transition-all duration-300">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex items-center justify-between h-16">
@@ -101,9 +100,7 @@
         </div>
     </nav>
 
-    <!-- Hero Section -->
     <header id="hero" class="relative overflow-hidden pt-12 pb-20 md:py-28">
-        <!-- Interactive background grid & shapes -->
         <div class="absolute inset-0 -z-10 bg-[linear-gradient(to_right,#8080800a_1px,transparent_1px),linear-gradient(to_bottom,#8080800a_1px,transparent_1px)] bg-[size:14px_24px] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_0%,#000_70%,transparent_100%)]"></div>
         <div class="absolute top-20 left-10 w-72 h-72 bg-blue-400/20 rounded-full blur-3xl dark:bg-blue-600/10 animate-pulse"></div>
         <div class="absolute bottom-10 right-10 w-80 h-80 bg-purple-400/20 rounded-full blur-3xl dark:bg-purple-600/10 animate-pulse" style="animation-delay: 2s;"></div>
@@ -127,14 +124,12 @@
         </div>
     </header>
 
-    <!-- Core Portfolio Cards Section -->
     <main id="cards" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <div class="text-center mb-16">
             <h2 class="text-3xl font-bold tracking-tight mb-3">포트폴리오 핵심 주제</h2>
             <p class="text-slate-500 dark:text-slate-400">카드를 선택해 세부 연구 내용과 차트 분석 결과를 확인해 보세요.</p>
         </div>
 
-        <!-- Cards Grid -->
         <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
             
             <!-- Card 1: About Me -->
@@ -155,8 +150,8 @@
                 </div>
             </div>
 
-            <!-- Card 2: Busan Admissions Analysis -->
-            <div onclick="openModal('busan')" class="group relative flex flex-col justify-between p-8 rounded-3xl bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800/80 shadow-premium dark:shadow-premium-dark hover:shadow-2xl dark:hover:shadow-violet-500/10 cursor-pointer transition-all duration-300 hover:-translate-y-2">
+            <!-- Card 2: Busan Admissions Analysis (Navigates directly to code1.html in current folder) -->
+            <a href="./code1.html" class="group relative flex flex-col justify-between p-8 rounded-3xl bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800/80 shadow-premium dark:shadow-premium-dark hover:shadow-2xl dark:hover:shadow-violet-500/10 transition-all duration-300 hover:-translate-y-2">
                 <div>
                     <div class="w-14 h-14 rounded-2xl bg-violet-50 dark:bg-violet-950/50 flex items-center justify-center text-violet-600 dark:text-violet-400 mb-6 group-hover:scale-110 transition-transform">
                         <i class="fa-solid fa-chart-line text-2xl"></i>
@@ -168,10 +163,10 @@
                     </p>
                 </div>
                 <div class="mt-8 pt-4 border-t border-slate-100 dark:border-slate-800 flex items-center justify-between">
-                    <span class="text-sm font-semibold text-slate-500 dark:text-slate-400">자세히 보기</span>
+                    <span class="text-sm font-semibold text-slate-500 dark:text-slate-400">분석 문서 열기</span>
                     <i class="fa-solid fa-arrow-right text-violet-500 transform group-hover:translate-x-1.5 transition-transform"></i>
                 </div>
-            </div>
+            </a>
 
             <!-- Card 3: Department of Interest Analysis -->
             <div onclick="openModal('department')" class="group relative flex flex-col justify-between p-8 rounded-3xl bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800/80 shadow-premium dark:shadow-premium-dark hover:shadow-2xl dark:hover:shadow-emerald-500/10 cursor-pointer transition-all duration-300 hover:-translate-y-2">
@@ -194,7 +189,7 @@
         </div>
     </main>
 
-    <!-- Modal Backdrop -->
+    <!-- Modal Backdrop (Hidden by default) -->
     <div id="modalBackdrop" class="fixed inset-0 z-50 hidden bg-slate-950/60 backdrop-blur-sm flex items-center justify-center p-4">
         
         <!-- Modal Content Container -->
@@ -216,6 +211,14 @@
                 </button>
             </div>
 
+            <!-- Modal Body (Scrollable Content Container with Defensive Target ID) -->
+            <div id="modalBody" class="flex-1 overflow-y-auto p-6 custom-scrollbar text-slate-700 dark:text-slate-200">
+                <!-- Content will be dynamically injected by JavaScript -->
+            </div>
+            
+        </div>
+    </div>
+
     <!-- Footer -->
     <footer class="border-t border-slate-200/50 dark:border-slate-800/50 py-12 text-center text-sm text-slate-400">
         <p>© 2026 Highschooler Kim Daon. All Rights Reserved.</p>
@@ -226,21 +229,45 @@
         // Set Theme initially based on OS preference or localStorage
         if (localStorage.getItem('color-theme') === 'dark' || (!('color-theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
             document.documentElement.classList.add('dark');
-            document.getElementById('themeIcon').className = 'fa-solid fa-sun text-lg text-amber-400';
+            const themeIcon = document.getElementById('themeIcon');
+            if (themeIcon) themeIcon.className = 'fa-solid fa-sun text-lg text-amber-400';
         } else {
             document.documentElement.classList.remove('dark');
-            document.getElementById('themeIcon').className = 'fa-solid fa-moon text-lg';
+            const themeIcon = document.getElementById('themeIcon');
+            if (themeIcon) themeIcon.className = 'fa-solid fa-moon text-lg';
+        }
+
+        // Safe navigation to handle Iframe / Blob Preview restrictions smoothly
+        function safeNavigate(url, fallbackTopic) {
+            try {
+                // Check if current page is served over blob or inside sandboxed iframe
+                const isRestrictedEnv = window.location.protocol === 'blob:' || 
+                                        window.location.pathname === '' || 
+                                        window.self !== window.top;
+                                        
+                if (isRestrictedEnv) {
+                    console.log("Iframe/Blob environment detected. Showing presentation fallback modal instead of broken redirect.");
+                    openModal(fallbackTopic);
+                } else {
+                    window.location.href = url;
+                }
+            } catch (err) {
+                console.warn("Navigation failed, using interactive modal as fallback:", err);
+                openModal(fallbackTopic);
+            }
         }
 
         function toggleTheme() {
             if (document.documentElement.classList.contains('dark')) {
                 document.documentElement.classList.remove('dark');
                 localStorage.setItem('color-theme', 'light');
-                document.getElementById('themeIcon').className = 'fa-solid fa-moon text-lg';
+                const themeIcon = document.getElementById('themeIcon');
+                if (themeIcon) themeIcon.className = 'fa-solid fa-moon text-lg';
             } else {
                 document.documentElement.classList.add('dark');
                 localStorage.setItem('color-theme', 'dark');
-                document.getElementById('themeIcon').className = 'fa-solid fa-sun text-lg text-amber-400';
+                const themeIcon = document.getElementById('themeIcon');
+                if (themeIcon) themeIcon.className = 'fa-solid fa-sun text-lg text-amber-400';
             }
             // Redraw charts if modal is active, because grid colors might change
             if (activeChart1) rebuildBusanCharts();
@@ -253,25 +280,7 @@
         let activeChart3 = null;
         let activeChart4 = null;
 
-        // Custom Show Toast function instead of alert
-        function showToast(message) {
-            const toast = document.getElementById('toast');
-            const toastText = document.getElementById('toastText');
-            toastText.textContent = message;
-            toast.classList.remove('hidden');
-            setTimeout(() => {
-                toast.classList.remove('translate-y-10', 'opacity-0');
-            }, 50);
-            
-            setTimeout(() => {
-                toast.classList.add('translate-y-10', 'opacity-0');
-                setTimeout(() => {
-                    toast.classList.add('hidden');
-                }, 300);
-            }, 3000);
-        }
-
-        // Modal Control Functions
+        // Modal Control Functions with Robust Defensive Code
         function openModal(topic) {
             const backdrop = document.getElementById('modalBackdrop');
             const container = document.getElementById('modalContainer');
@@ -280,18 +289,27 @@
             const title = document.getElementById('modalTitle');
             const body = document.getElementById('modalBody');
 
+            // Defensive Check: Prevent execution if core elements are missing
+            if (!backdrop || !container || !body) {
+                console.error("Critical error: Modal DOM structures are missing in the current document context.");
+                return;
+            }
+
             // Prevent Background Scrolling
             document.body.style.overflow = 'hidden';
 
-            // Reset Scroll to top
+            // Reset Scroll to top securely
             body.scrollTop = 0;
 
             // Setup Details based on selection
             if (topic === 'intro') {
-                iconContainer.className = 'w-10 h-10 rounded-xl flex items-center justify-center text-white bg-blue-500';
-                iconContainer.innerHTML = '<i class="fa-solid fa-user-graduate"></i>';
-                category.textContent = 'My Identity';
-                title.textContent = '자기소개 및 활동 타임라인';
+                if (iconContainer) {
+                    iconContainer.className = 'w-10 h-10 rounded-xl flex items-center justify-center text-white bg-blue-500';
+                    iconContainer.innerHTML = '<i class="fa-solid fa-user-graduate"></i>';
+                }
+                if (category) category.textContent = 'My Identity';
+                if (title) title.textContent = '자기소개 및 활동 타임라인';
+                
                 body.innerHTML = `
                     <div class="space-y-8">
                         <div class="flex flex-col md:flex-row gap-6 items-center">
@@ -299,7 +317,7 @@
                                 다온
                             </div>
                             <div class="space-y-2 text-center md:text-left">
-                                <h4 class="text-2xl font-bold">김다온 (Kim Daon)</h4>
+                                <h4 class="text-2xl font-bold text-slate-900 dark:text-white">김다온 (Kim Daon)</h4>
                                 <p class="text-blue-500 dark:text-blue-400 font-semibold text-sm">부산 센텀소프트고등학교 2학년 (데이터분석 전공)</p>
                                 <div class="flex flex-wrap gap-2 justify-center md:justify-start">
                                     <span class="px-2.5 py-0.5 rounded-md text-xs font-semibold bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300">#Python_Pandas</span>
@@ -319,11 +337,11 @@
 
                         <!-- Technical Skills -->
                         <div>
-                            <h5 class="font-bold text-lg mb-4 flex items-center gap-2"><i class="fa-solid fa-screwdriver-wrench text-blue-500"></i> 사용 가능한 기술 스택</h5>
+                            <h5 class="font-bold text-lg mb-4 flex items-center gap-2 text-slate-900 dark:text-white"><i class="fa-solid fa-screwdriver-wrench text-blue-500"></i> 사용 가능한 기술 스택</h5>
                             <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                                 <div class="p-4 bg-slate-50 dark:bg-slate-800/50 rounded-xl">
                                     <div class="flex justify-between font-bold text-sm mb-1.5">
-                                        <span>Python (Pandas, Numpy)</span>
+                                        <span class="text-slate-800 dark:text-slate-200">Python (Pandas, Numpy)</span>
                                         <span class="text-blue-500">80%</span>
                                     </div>
                                     <div class="w-full h-2 bg-slate-200 dark:bg-slate-700 rounded-full overflow-hidden">
@@ -333,7 +351,7 @@
                                 </div>
                                 <div class="p-4 bg-slate-50 dark:bg-slate-800/50 rounded-xl">
                                     <div class="flex justify-between font-bold text-sm mb-1.5">
-                                        <span>Chart.js & Web Visualizations</span>
+                                        <span class="text-slate-800 dark:text-slate-200">Chart.js & Web Visualizations</span>
                                         <span class="text-violet-500">75%</span>
                                     </div>
                                     <div class="w-full h-2 bg-slate-200 dark:bg-slate-700 rounded-full overflow-hidden">
@@ -346,12 +364,12 @@
 
                         <!-- Timeline / Achievements -->
                         <div>
-                            <h5 class="font-bold text-lg mb-6 flex items-center gap-2"><i class="fa-solid fa-timeline text-blue-500"></i> 주요 활동 및 연구 이력</h5>
+                            <h5 class="font-bold text-lg mb-6 flex items-center gap-2 text-slate-900 dark:text-white"><i class="fa-solid fa-timeline text-blue-500"></i> 주요 활동 및 연구 이력</h5>
                             <div class="space-y-6 relative border-l border-slate-200 dark:border-slate-800 pl-4 ml-2">
                                 <div class="relative">
                                     <div class="absolute -left-[21px] top-1 w-3.5 h-3.5 rounded-full bg-blue-500 border-4 border-white dark:border-slate-900"></div>
                                     <span class="text-xs font-bold text-blue-500">2026.04 ~ 현재</span>
-                                    <h6 class="font-bold text-base mt-1">교내 융합 소프트웨어 동아리 "D-Vision" 회장</h6>
+                                    <h6 class="font-bold text-base mt-1 text-slate-900 dark:text-white">교내 융합 소프트웨어 동아리 "D-Vision" 회장</h6>
                                     <p class="text-xs text-slate-500 dark:text-slate-400 mt-1">
                                         교우들의 진로 탐구와 부산 지역 고교생 입시 빅데이터 분석 공동 프로젝트를 주도하며 데이터 협업 능력을 함양하고 있습니다.
                                     </p>
@@ -359,7 +377,7 @@
                                 <div class="relative">
                                     <div class="absolute -left-[21px] top-1 w-3.5 h-3.5 rounded-full bg-indigo-500 border-4 border-white dark:border-slate-900"></div>
                                     <span class="text-xs font-bold text-indigo-500">2025.10</span>
-                                    <h6 class="font-bold text-base mt-1">부산 고등학생 ICT 성과 발표회 우수상 수상</h6>
+                                    <h6 class="font-bold text-base mt-1 text-slate-900 dark:text-white">부산 고등학생 ICT 성과 발표회 우수상 수상</h6>
                                     <p class="text-xs text-slate-500 dark:text-slate-400 mt-1">
                                         부산 지역 대중교통 승하차 빅데이터를 활용한 '학생 전용 버스 노선 개선안'을 분석/발표하여 지역 공헌 연구 부문 우수상을 받았습니다.
                                     </p>
@@ -367,7 +385,7 @@
                                 <div class="relative">
                                     <div class="absolute -left-[21px] top-1 w-3.5 h-3.5 rounded-full bg-purple-500 border-4 border-white dark:border-slate-900"></div>
                                     <span class="text-xs font-bold text-purple-500">2025.05</span>
-                                    <h6 class="font-bold text-base mt-1">파이썬을 활용한 기초 통계분석 프로젝트</h6>
+                                    <h6 class="font-bold text-base mt-1 text-slate-900 dark:text-white">파이썬을 활용한 기초 통계분석 프로젝트</h6>
                                     <p class="text-xs text-slate-500 dark:text-slate-400 mt-1">
                                         부산 교육 통계 공공 데이터를 수집하고 정제하여 인근 중·고교 신입생 감소 수치를 예측하고 시각화하는 첫 데이터 프로젝트를 완료했습니다.
                                     </p>
@@ -377,10 +395,13 @@
                     </div>
                 `;
             } else if (topic === 'busan') {
-                iconContainer.className = 'w-10 h-10 rounded-xl flex items-center justify-center text-white bg-violet-500';
-                iconContainer.innerHTML = '<i class="fa-solid fa-chart-line"></i>';
-                category.textContent = 'Region Analysis';
-                title.textContent = '부산지역 대학교 신입생 경쟁률 심층 분석';
+                if (iconContainer) {
+                    iconContainer.className = 'w-10 h-10 rounded-xl flex items-center justify-center text-white bg-violet-500';
+                    iconContainer.innerHTML = '<i class="fa-solid fa-chart-line"></i>';
+                }
+                if (category) category.textContent = 'Region Analysis';
+                if (title) title.textContent = '부산지역 대학교 신입생 경쟁률 심층 분석';
+                
                 body.innerHTML = `
                     <div class="space-y-8">
                         <div class="bg-violet-50/50 dark:bg-violet-950/20 p-5 rounded-2xl border border-violet-100/30 dark:border-violet-900/30 text-sm leading-relaxed">
@@ -406,7 +427,7 @@
 
                         <!-- High Schooler's Insight -->
                         <div class="space-y-4">
-                            <h5 class="font-bold text-lg flex items-center gap-2"><i class="fa-solid fa-magnifying-glass-chart text-violet-500"></i> 김다온의 데이터 인사이트</h5>
+                            <h5 class="font-bold text-lg flex items-center gap-2 text-slate-900 dark:text-white"><i class="fa-solid fa-magnifying-glass-chart text-violet-500"></i> 김다온의 데이터 인사이트</h5>
                             
                             <div class="space-y-3 text-sm text-slate-600 dark:text-slate-300">
                                 <div class="flex gap-2 items-start bg-white dark:bg-slate-900 p-3 rounded-xl border border-slate-100 dark:border-slate-800">
@@ -430,10 +451,13 @@
                     rebuildBusanCharts();
                 }, 150);
             } else if (topic === 'department') {
-                iconContainer.className = 'w-10 h-10 rounded-xl flex items-center justify-center text-white bg-emerald-500';
-                iconContainer.innerHTML = '<i class="fa-solid fa-lightbulb"></i>';
-                category.textContent = 'Major Trend';
-                title.textContent = '관심학과(인공지능·컴퓨터공학) 트렌드 및 역량 분석';
+                if (iconContainer) {
+                    iconContainer.className = 'w-10 h-10 rounded-xl flex items-center justify-center text-white bg-emerald-500';
+                    iconContainer.innerHTML = '<i class="fa-solid fa-lightbulb"></i>';
+                }
+                if (category) category.textContent = 'Major Trend';
+                if (title) title.textContent = '관심학과(인공지능·컴퓨터공학) 트렌드 및 역량 분석';
+                
                 body.innerHTML = `
                     <div class="space-y-8">
                         <div class="bg-emerald-50/50 dark:bg-emerald-950/20 p-5 rounded-2xl border border-emerald-100/30 dark:border-emerald-900/30 text-sm leading-relaxed">
@@ -459,7 +483,7 @@
 
                         <!-- Sub Content: Preparation Roadmap -->
                         <div>
-                            <h5 class="font-bold text-lg mb-4 flex items-center gap-2"><i class="fa-solid fa-road text-emerald-500"></i> 학과 진학을 위한 나의 학업 준비 로드맵</h5>
+                            <h5 class="font-bold text-lg mb-4 flex items-center gap-2 text-slate-900 dark:text-white"><i class="fa-solid fa-road text-emerald-500"></i> 학과 진학을 위한 나의 학업 준비 로드맵</h5>
                             <div class="space-y-3">
                                 <div class="p-4 rounded-xl border border-slate-100 dark:border-slate-800 bg-white dark:bg-slate-900">
                                     <h6 class="font-bold text-slate-800 dark:text-white flex items-center gap-1.5"><span class="w-2 h-2 rounded-full bg-emerald-500"></span>수학적 기본기 다지기</h6>
@@ -490,6 +514,8 @@
         function closeModal() {
             const backdrop = document.getElementById('modalBackdrop');
             const container = document.getElementById('modalContainer');
+
+            if (!backdrop || !container) return;
 
             // Restore Scroll
             document.body.style.overflow = '';
@@ -719,13 +745,11 @@
         }
 
         // Close Modal on clicking backdrop
-        document.getElementById('modalBackdrop').addEventListener('click', function(e) {
-            if (e.target === this) closeModal();
-        });
-
-        // Initialize App
-        window.onload = function() {
-            // Initialization logic simplified
+        const backdropEl = document.getElementById('modalBackdrop');
+        if (backdropEl) {
+            backdropEl.addEventListener('click', function(e) {
+                if (e.target === this) closeModal();
+            });
         }
     </script>
 </body>

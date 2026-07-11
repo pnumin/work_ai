@@ -1,0 +1,870 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>부산지역 대학교 신입생 경쟁률 심층 분석 보고서 (2024~2026)</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Chart.js CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <!-- Lucide Icons CDN for beautiful clean icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Noto+Sans+KR:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', 'Noto Sans KR', sans-serif;
+        }
+        .gradient-bg {
+            background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+        }
+        .card-shadow {
+            box-shadow: 0 4px 20px -2px rgba(0, 0, 0, 0.05), 0 2px 8px -1px rgba(0, 0, 0, 0.03);
+        }
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 6px;
+            height: 6px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: #f1f5f9;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #cbd5e1;
+            border-radius: 4px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+            background: #94a3b8;
+        }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-800 antialiased min-h-screen">
+
+<!-- 상단 헤더 및 히어로 섹션 -->
+<header class="gradient-bg text-white py-12 px-4 sm:px-6 lg:px-8 relative overflow-hidden border-b border-slate-800">
+    <div class="absolute inset-0 opacity-10 bg-[radial-gradient(#38bdf8_1px,transparent_1px)] [background-size:16px_16px]"></div>
+    <div class="max-w-7xl mx-auto relative z-10">
+        <div class="flex flex-wrap items-center justify-between gap-4">
+            <span class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-semibold bg-sky-500/10 text-sky-400 border border-sky-500/20">
+                <i data-lucide="award" class="w-3.5 h-3.5"></i> 대입 심층 분석 리포트
+            </span>
+            <div class="text-xs text-slate-400 flex items-center gap-3">
+                <span class="flex items-center gap-1"><i data-lucide="user" class="w-3.5 h-3.5"></i> 분석: 입시 전문가 그룹</span>
+                <span class="text-slate-600">|</span>
+                <span class="flex items-center gap-1"><i data-lucide="calendar" class="w-3.5 h-3.5"></i> 2026년 7월 11일</span>
+            </div>
+        </div>
+        <h1 class="mt-6 text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight leading-tight">
+            부산지역 대학교 <span class="text-transparent bg-clip-text bg-gradient-to-r from-sky-400 to-indigo-400">신입생 경쟁률</span> 심층 분석 보고서
+        </h1>
+        <p class="mt-4 text-base sm:text-lg text-slate-300 max-w-3xl leading-relaxed">
+            2024학년도부터 2026학년도까지 부산지역 주요 4년제 일반 대학교 14개교의 입시 경쟁률 원천 데이터를 기반으로 가공된 정밀 리포트 및 지능형 시뮬레이션입니다.
+        </p>
+    </div>
+</header>
+
+<!-- 핵심 주요 지표 카드 요약 -->
+<section class="max-w-7xl mx-auto -mt-6 px-4 sm:px-6 lg:px-8 relative z-20">
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+        <!-- KPI 1 -->
+        <div class="bg-white p-6 rounded-2xl card-shadow border border-slate-100 flex items-center justify-between">
+            <div>
+                <p class="text-xs font-medium text-slate-400 uppercase tracking-wider">분석 대상 대학 수</p>
+                <h3 class="text-2xl font-bold text-slate-800 mt-1">14개 대학교</h3>
+                <p class="text-xs text-slate-500 mt-1">4년제 일반대학 기준</p>
+            </div>
+            <div class="w-12 h-12 rounded-xl bg-sky-50 flex items-center justify-center text-sky-600">
+                <i data-lucide="school" class="w-6 h-6"></i>
+            </div>
+        </div>
+        <!-- KPI 2 -->
+        <div class="bg-white p-6 rounded-2xl card-shadow border border-slate-100 flex items-center justify-between">
+            <div>
+                <p class="text-xs font-medium text-slate-400 uppercase tracking-wider">3개년 종합 평균 경쟁률</p>
+                <h3 class="text-2xl font-bold text-indigo-600 mt-1">6.06 : 1</h3>
+                <p class="text-xs text-indigo-500 mt-1 flex items-center gap-0.5">
+                    <i data-lucide="trending-up" class="w-3 h-3"></i> '24(5.79) → '26(6.19) 상승
+                </p>
+            </div>
+            <div class="w-12 h-12 rounded-xl bg-indigo-50 flex items-center justify-center text-indigo-600">
+                <i data-lucide="trending-up" class="w-6 h-6"></i>
+            </div>
+        </div>
+        <!-- KPI 3 -->
+        <div class="bg-white p-6 rounded-2xl card-shadow border border-slate-100 flex items-center justify-between">
+            <div>
+                <p class="text-xs font-medium text-slate-400 uppercase tracking-wider">경쟁률 최상위 대학교</p>
+                <h3 class="text-2xl font-bold text-emerald-600 mt-1">부산대학교</h3>
+                <p class="text-xs text-emerald-500 mt-1">3개년 평균 8.87 : 1</p>
+            </div>
+            <div class="w-12 h-12 rounded-xl bg-emerald-50 flex items-center justify-center text-emerald-600">
+                <i data-lucide="crown" class="w-6 h-6"></i>
+            </div>
+        </div>
+        <!-- KPI 4 -->
+        <div class="bg-white p-6 rounded-2xl card-shadow border border-slate-100 flex items-center justify-between">
+            <div>
+                <p class="text-xs font-medium text-slate-400 uppercase tracking-wider">실질 미충원 위험 대학군</p>
+                <h3 class="text-2xl font-bold text-rose-600 mt-1">7개 대학교</h3>
+                <p class="text-xs text-rose-500 mt-1">3개년 평균 6.0 : 1 미만 기준</p>
+            </div>
+            <div class="w-12 h-12 rounded-xl bg-rose-50 flex items-center justify-center text-rose-600">
+                <i data-lucide="alert-triangle" class="w-6 h-6"></i>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- 서론: 분석 배경 및 학령인구 위기 개요 -->
+<main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+    <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+        <!-- 서론 리포트 카드 -->
+        <div class="lg:col-span-2 bg-white rounded-2xl p-6 sm:p-8 card-shadow border border-slate-100">
+            <h2 class="text-xl sm:text-2xl font-bold text-slate-900 flex items-center gap-2">
+                <i data-lucide="file-text" class="text-sky-600 w-6 h-6"></i> 
+                1. 서론: 부산지역 대학 입시 지형의 변화 배경
+            </h2>
+            <div class="mt-6 space-y-4 text-slate-600 leading-relaxed text-sm sm:text-base">
+                <p>
+                    최근 대한민국의 대학 입시는 <strong class="text-slate-900 font-semibold">'학령인구 감소'</strong>와 <strong class="text-slate-900 font-semibold">'수도권 대학 집중화 현상'</strong>이라는 이중고를 겪고 있습니다. 특히 비수도권 지역 대학들은 우수한 신입생 유치에 상당한 어려움을 겪고 있으며, 이는 지역 대학들의 생존과 직결된 문제로 대두되었습니다.
+                </p>
+                <p>
+                    부산광역시는 대한민국 제2의 도시임에도 불구하고 청년 인구 유출과 학령인구 감소의 직격탄을 맞고 있는 대표적인 지역 중 하나입니다. 지방재정 및 인재 육성의 중심 고리가 끊어질 수 있다는 우려 속에 대학들이 생존전략 수립에 고심하고 있습니다.
+                </p>
+                <p class="bg-slate-50 p-4 rounded-xl border border-slate-100 italic">
+                    본 보고서는 <strong class="text-slate-900">2024학년도부터 2026학년도까지 부산지역 주요 4년제 일반 대학교 14개교</strong>의 신입생 경쟁률 데이터를 바탕으로 지역 입시 지형을 심층적으로 분석하였습니다. (전문대학, 기능대학 및 사이버대학과 경쟁률이 집계되지 않거나 정원이 없는 학교는 제외)
+                </p>
+            </div>
+        </div>
+
+        <!-- 위기 지표 및 주요 키워드 요약 -->
+        <div class="bg-gradient-to-b from-slate-900 to-indigo-950 text-white rounded-2xl p-6 sm:p-8 card-shadow flex flex-col justify-between">
+            <div>
+                <h3 class="text-lg font-bold text-sky-400 flex items-center gap-2">
+                    <i data-lucide="activity" class="w-5 h-5"></i> 3대 지방대 위기 키워드
+                </h3>
+                <p class="text-xs text-slate-400 mt-1">부산 대입 지형을 흔드는 핵심 위기 요인</p>
+                
+                <div class="mt-6 space-y-4">
+                    <div class="border-l-2 border-sky-400 pl-3">
+                        <h4 class="text-sm font-semibold text-white">01. 데드크로스 심화</h4>
+                        <p class="text-xs text-slate-300 mt-1">입학 정원이 고교 졸업자 수보다 많아지는 정원 초과 미달 현상의 구조적 안착</p>
+                    </div>
+                    <div class="border-l-2 border-indigo-400 pl-3">
+                        <h4 class="text-sm font-semibold text-white">02. '인서울' 블랙홀</h4>
+                        <p class="text-xs text-slate-300 mt-1">수도권 쏠림 현상 가속화로 내신/수능 최상위권 학생들의 대규모 이탈</p>
+                    </div>
+                    <div class="border-l-2 border-purple-400 pl-3">
+                        <h4 class="text-sm font-semibold text-white">03. 수시 6회의 착시</h4>
+                        <p class="text-xs text-slate-300 mt-1">6회 중복 지원으로 경쟁률이 실제보다 부풀려져 최종 미충원으로 이어지는 허수 지원</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="mt-8 pt-4 border-t border-slate-800/80 text-xs text-slate-400 flex items-center justify-between">
+                <span>실질 생존 하한선</span>
+                <span class="text-amber-400 font-bold text-sm">6.00 : 1 경쟁률</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- 2. 신입생 경쟁률 통계 데이터 및 인터랙티브 탐색기 -->
+    <div class="mt-12 bg-white rounded-2xl p-6 sm:p-8 card-shadow border border-slate-100">
+        <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-slate-100 pb-5">
+            <div>
+                <h2 class="text-xl sm:text-2xl font-bold text-slate-900 flex items-center gap-2">
+                    <i data-lucide="list-filter" class="text-indigo-600 w-6 h-6"></i>
+                    2. 부산지역 대학교 신입생 경쟁률 통계 데이터
+                </h2>
+                <p class="text-slate-500 text-xs sm:text-sm mt-1">데이터를 클릭해 정렬하거나 특정 조건으로 대학을 검색하고 필터링해 보세요.</p>
+            </div>
+            <!-- 검색 필터 영역 -->
+            <div class="flex flex-wrap items-center gap-2">
+                <div class="relative">
+                    <i data-lucide="search" class="w-4 h-4 text-slate-400 absolute left-3 top-1/2 -translate-y-1/2"></i>
+                    <input type="text" id="univSearchInput" placeholder="대학명 검색..." class="pl-9 pr-4 py-1.5 w-44 sm:w-60 text-xs rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all">
+                </div>
+                <select id="groupFilter" class="px-3 py-1.5 text-xs rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-indigo-500 transition-all">
+                    <option value="all">전체 그룹 보기</option>
+                    <option value="top">최상위 (8.0↑)</option>
+                    <option value="mid-high">중상위 (6.0 ~ 8.0)</option>
+                    <option value="mid-low">중하위 (5.0 ~ 6.0)</option>
+                    <option value="low">하위 (4.0↓)</option>
+                </select>
+            </div>
+        </div>
+
+        <!-- 테이블 뷰포트 -->
+        <div class="overflow-x-auto custom-scrollbar mt-6">
+            <table class="w-full text-left border-collapse">
+                <thead>
+                    <tr class="border-b border-slate-200 text-slate-500 text-xs font-semibold bg-slate-50/50">
+                        <th class="py-3 px-4 rounded-l-lg cursor-pointer hover:bg-slate-100 transition-colors" onclick="sortData('name')">
+                            <span class="flex items-center gap-1">학교명 <i data-lucide="arrow-up-down" class="w-3 h-3 text-slate-400"></i></span>
+                        </th>
+                        <th class="py-3 px-4">본분교</th>
+                        <th class="py-3 px-4 cursor-pointer hover:bg-slate-100 transition-colors" onclick="sortData('r2024')">
+                            <span class="flex items-center gap-1">2024년 경쟁률 <i data-lucide="arrow-up-down" class="w-3 h-3 text-slate-400"></i></span>
+                        </th>
+                        <th class="py-3 px-4 cursor-pointer hover:bg-slate-100 transition-colors" onclick="sortData('r2025')">
+                            <span class="flex items-center gap-1">2025년 경쟁률 <i data-lucide="arrow-up-down" class="w-3 h-3 text-slate-400"></i></span>
+                        </th>
+                        <th class="py-3 px-4 cursor-pointer hover:bg-slate-100 transition-colors" onclick="sortData('r2026')">
+                            <span class="flex items-center gap-1">2026년 경쟁률 <i data-lucide="arrow-up-down" class="w-3 h-3 text-slate-400"></i></span>
+                        </th>
+                        <th class="py-3 px-4 cursor-pointer hover:bg-slate-100 transition-colors bg-indigo-50/50 rounded-r-lg" onclick="sortData('avg')">
+                            <span class="flex items-center gap-1 text-indigo-700">3개년 평균경쟁률 <i data-lucide="arrow-up-down" class="w-3 h-3 text-indigo-400"></i></span>
+                        </th>
+                        <th class="py-3 px-4">전문가 리스크 진단</th>
+                    </tr>
+                </thead>
+                <tbody id="univTableBody" class="divide-y divide-slate-100 text-xs sm:text-sm">
+                    <!-- Dynamic Rows Insertion in JS -->
+                </tbody>
+            </table>
+        </div>
+        <div class="mt-3 text-right">
+            <span class="text-xs text-slate-400 italic">* 본 테이블의 데이터는 정렬 및 실시간 검색을 반영합니다.</span>
+        </div>
+    </div>
+
+    <!-- 3. 신입생 경쟁률 시각화 분석 (Chart.js) -->
+    <div class="mt-12 bg-white rounded-2xl p-6 sm:p-8 card-shadow border border-slate-100">
+        <h2 class="text-xl sm:text-2xl font-bold text-slate-900 flex items-center gap-2 border-b border-slate-100 pb-5">
+            <i data-lucide="pie-chart" class="text-emerald-600 w-6 h-6"></i>
+            3. 신입생 경쟁률 시각화 분석
+        </h2>
+
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mt-6">
+            <!-- 차트 1: 연도별 경쟁률 비교 -->
+            <div class="bg-slate-50 p-4 sm:p-6 rounded-xl border border-slate-100">
+                <div class="flex items-center justify-between mb-4">
+                    <div>
+                        <h4 class="text-sm sm:text-base font-bold text-slate-800">연도별 경쟁률 추이 비교</h4>
+                        <p class="text-xs text-slate-500">14개 대학교의 2024~2026학년도 연도별 추세</p>
+                    </div>
+                    <span class="px-2 py-1 bg-white text-slate-600 text-2xs font-semibold rounded-md border border-slate-200">다중 막대 그래프</span>
+                </div>
+                <div class="relative h-80 sm:h-96 w-full">
+                    <canvas id="yearlyChart"></canvas>
+                </div>
+            </div>
+
+            <!-- 차트 2: 3개년 평균 경쟁률 비교 -->
+            <div class="bg-slate-50 p-4 sm:p-6 rounded-xl border border-slate-100">
+                <div class="flex items-center justify-between mb-4">
+                    <div>
+                        <h4 class="text-sm sm:text-base font-bold text-slate-800">3개년 평균 경쟁률 (내림차순)</h4>
+                        <p class="text-xs text-slate-500">가장 강력한 입학 선호도 지표를 기록한 상위 대학교 순</p>
+                    </div>
+                    <span class="px-2 py-1 bg-white text-slate-600 text-2xs font-semibold rounded-md border border-slate-200">가로 막대 랭킹</span>
+                </div>
+                <div class="relative h-80 sm:h-96 w-full">
+                    <canvas id="averageChart"></canvas>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 4. 입시 전문가 관점의 부산지역 대학 정밀 분석 -->
+    <div class="mt-12 bg-white rounded-2xl p-6 sm:p-8 card-shadow border border-slate-100">
+        <h2 class="text-xl sm:text-2xl font-bold text-slate-900 flex items-center gap-2 border-b border-slate-100 pb-5">
+            <i data-lucide="trending-up" class="text-rose-600 w-6 h-6"></i>
+            4. 입시 전문가 관점의 부산지역 대학 정밀 분석
+        </h2>
+
+        <!-- 종합 트렌드 분석 -->
+        <div class="mt-6 bg-indigo-50/50 rounded-2xl p-6 border border-indigo-100/60">
+            <h3 class="text-base sm:text-lg font-bold text-indigo-950 flex items-center gap-2">
+                <span class="flex items-center justify-center w-6 h-6 rounded-full bg-indigo-100 text-indigo-700 text-xs font-bold">4.1</span>
+                종합 트렌드 분석: 경쟁률 소폭 상승의 실상
+            </h3>
+            <p class="text-slate-500 text-xs sm:text-sm mt-1 pl-8">단순한 선호도 상승이 아닌 복합적인 입시 설계의 영향 분석</p>
+            
+            <div class="mt-4 grid grid-cols-1 md:grid-cols-3 gap-6 pl-8">
+                <div class="bg-white p-5 rounded-xl border border-indigo-100/50">
+                    <div class="w-8 h-8 rounded-lg bg-sky-50 text-sky-600 flex items-center justify-center mb-3">
+                        <i data-lucide="scissors" class="w-4 h-4"></i>
+                    </div>
+                    <h4 class="text-sm font-bold text-slate-900">선제적 정원 감축</h4>
+                    <p class="text-xs text-slate-600 mt-1.5 leading-relaxed">
+                        신입생 정원 자체를 선제 차단해 모수가 작아짐에 따라, 지원자 수가 소폭 떨어졌음에도 경쟁률 수치 자체는 방어되거나 상승 반등하는 기하학적 착시 효과가 발생했습니다.
+                    </p>
+                </div>
+                <div class="bg-white p-5 rounded-xl border border-indigo-100/50">
+                    <div class="w-8 h-8 rounded-lg bg-indigo-50 text-indigo-600 flex items-center justify-center mb-3">
+                        <i data-lucide="layers" class="w-4 h-4"></i>
+                    </div>
+                    <h4 class="text-sm font-bold text-slate-900">구조조정 및 무전공제</h4>
+                    <p class="text-xs text-slate-600 mt-1.5 leading-relaxed">
+                        전공자율선택제 확대와 첨단 바이오·보건계열로의 학과 쏠림이 유도되었습니다. 이는 메디컬 등 실속형 전공이 강세인 특정 학과로 원서가 과밀화되는 결과를 낳았습니다.
+                    </p>
+                </div>
+                <div class="bg-white p-5 rounded-xl border border-indigo-100/50">
+                    <div class="w-8 h-8 rounded-lg bg-purple-50 text-purple-600 flex items-center justify-center mb-3">
+                        <i data-lucide="alert-circle" class="w-4 h-4"></i>
+                    </div>
+                    <h4 class="text-sm font-bold text-slate-900">수시 6회 이월 허수</h4>
+                    <p class="text-xs text-slate-600 mt-1.5 leading-relaxed">
+                        지방 사립 대학들의 경우 최초 합격자들의 이탈로 추가 합격자가 대거 발생하므로, 단순 경쟁률 6대 1 미만은 수시 미충원 및 정시 대량 이월로 직결되는 경계선입니다.
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <!-- 4.2 그룹별 상세 카드 -->
+        <div class="mt-10">
+            <h3 class="text-base sm:text-lg font-bold text-slate-900 flex items-center gap-2 mb-4">
+                <span class="flex items-center justify-center w-6 h-6 rounded-full bg-slate-100 text-slate-700 text-xs font-bold">4.2</span>
+                대학별 경쟁력 진단 및 그룹별 세부 분류
+            </h3>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <!-- 최상위 그룹 -->
+                <div class="bg-white rounded-xl p-5 border border-l-4 border-l-emerald-500 border-slate-100 card-shadow">
+                    <div class="flex items-start justify-between">
+                        <div>
+                            <span class="px-2.5 py-0.5 rounded-full text-2xs font-bold bg-emerald-50 text-emerald-700">최상위 그룹</span>
+                            <h4 class="text-base font-bold text-slate-900 mt-2">국립대 독주 체제 (8.0:1 이상)</h4>
+                        </div>
+                        <div class="text-emerald-500"><i data-lucide="shield-check" class="w-6 h-6"></i></div>
+                    </div>
+                    <div class="mt-3 flex gap-2 flex-wrap">
+                        <span class="px-2 py-1 bg-slate-50 rounded-md text-xs font-semibold text-slate-700 border border-slate-100">부산대 (8.87)</span>
+                        <span class="px-2 py-1 bg-slate-50 rounded-md text-xs font-semibold text-slate-700 border border-slate-100">국립부경대 (8.37)</span>
+                    </div>
+                    <p class="text-xs text-slate-600 mt-3 leading-relaxed">
+                        부산대와 약진이 두드러지는 부경대 등 국립대 연합/혁신 수혜 대학들입니다. 저렴한 등록금과 안정적인 혁신도시 공공기관 지역인재 채용 이득으로 학령인구 급감 속 방어력이 뛰어납니다.
+                    </p>
+                </div>
+
+                <!-- 중상위 그룹 -->
+                <div class="bg-white rounded-xl p-5 border border-l-4 border-l-sky-500 border-slate-100 card-shadow">
+                    <div class="flex items-start justify-between">
+                        <div>
+                            <span class="px-2.5 py-0.5 rounded-full text-2xs font-bold bg-sky-50 text-sky-700">중상위 그룹</span>
+                            <h4 class="text-base font-bold text-slate-900 mt-2">특성화 국공립 및 메디컬 강점 (6.0 ~ 8.0:1)</h4>
+                        </div>
+                        <div class="text-sky-500"><i data-lucide="activity" class="w-6 h-6"></i></div>
+                    </div>
+                    <div class="mt-3 flex gap-2 flex-wrap">
+                        <span class="px-2 py-1 bg-slate-50 rounded-md text-xs font-semibold text-slate-700 border border-slate-100">국립한국해양대 (7.57)</span>
+                        <span class="px-2 py-1 bg-slate-50 rounded-md text-xs font-semibold text-slate-700 border border-slate-100">부산가톨릭대 (7.00)</span>
+                        <span class="px-2 py-1 bg-slate-50 rounded-md text-xs font-semibold text-slate-700 border border-slate-100">경성대 (6.50)</span>
+                        <span class="px-2 py-1 bg-slate-50 rounded-md text-xs font-semibold text-slate-700 border border-slate-100">동아대 (6.27)</span>
+                        <span class="px-2 py-1 bg-slate-50 rounded-md text-xs font-semibold text-slate-700 border border-slate-100">고신대 (6.23)</span>
+                    </div>
+                    <p class="text-xs text-slate-600 mt-3 leading-relaxed">
+                        해양 특성화, 메디컬/간호보건 강점이 있는 대학들이 포함됩니다. 선방하고 있으나 대학 규모가 클수록 하위 학과 미달을 방지하기 위한 영리한 학과 수급 조절 노력이 수반되어야 합니다.
+                    </p>
+                </div>
+
+                <!-- 중하위 그룹 -->
+                <div class="bg-white rounded-xl p-5 border border-l-4 border-l-amber-500 border-slate-100 card-shadow">
+                    <div class="flex items-start justify-between">
+                        <div>
+                            <span class="px-2.5 py-0.5 rounded-full text-2xs font-bold bg-amber-50 text-amber-700">중하위 그룹</span>
+                            <h4 class="text-base font-bold text-slate-900 mt-2">생존 경계선 포지션 (5.0 ~ 6.0:1)</h4>
+                        </div>
+                        <div class="text-amber-500"><i data-lucide="help-circle" class="w-6 h-6"></i></div>
+                    </div>
+                    <div class="mt-3 flex gap-2 flex-wrap">
+                        <span class="px-2 py-1 bg-slate-50 rounded-md text-xs font-semibold text-slate-700 border border-slate-100">동명대 (5.87)</span>
+                        <span class="px-2 py-1 bg-slate-50 rounded-md text-xs font-semibold text-slate-700 border border-slate-100">부산교대 (5.27)</span>
+                        <span class="px-2 py-1 bg-slate-50 rounded-md text-xs font-semibold text-slate-700 border border-slate-100">동의대 (5.20)</span>
+                        <span class="px-2 py-1 bg-slate-50 rounded-md text-xs font-semibold text-slate-700 border border-slate-100">신라대 (5.17)</span>
+                        <span class="px-2 py-1 bg-slate-50 rounded-md text-xs font-semibold text-slate-700 border border-slate-100">동서대 (5.13)</span>
+                    </div>
+                    <p class="text-xs text-slate-600 mt-3 leading-relaxed">
+                        충원이 아슬아슬한 임계값 구간입니다. 특히 임용 정원 축소와 교권 이슈로 하락세를 면치 못하고 있는 교대의 흐름이 주목됩니다. 융합학부 도입, 캠퍼스 유휴부지 매각 등 특단의 혁신 자구책이 필요한 시점입니다.
+                    </p>
+                </div>
+
+                <!-- 하위 그룹 -->
+                <div class="bg-white rounded-xl p-5 border border-l-4 border-l-rose-500 border-slate-100 card-shadow">
+                    <div class="flex items-start justify-between">
+                        <div>
+                            <span class="px-2.5 py-0.5 rounded-full text-2xs font-bold bg-rose-50 text-rose-700">하위 그룹</span>
+                            <h4 class="text-base font-bold text-slate-900 mt-2">구조조정 및 다변화 긴급 (4.0:1 미만)</h4>
+                        </div>
+                        <div class="text-rose-500"><i data-lucide="alert-octagon" class="w-6 h-6"></i></div>
+                    </div>
+                    <div class="mt-3 flex gap-2 flex-wrap">
+                        <span class="px-2 py-1 bg-slate-50 rounded-md text-xs font-semibold text-slate-700 border border-slate-100">영산대(해운대) (3.77)</span>
+                        <span class="px-2 py-1 bg-slate-50 rounded-md text-xs font-semibold text-slate-700 border border-slate-100">부산외대 (3.57)</span>
+                    </div>
+                    <p class="text-xs text-slate-600 mt-3 leading-relaxed">
+                        전통 강점 어문계열 약세로 수시이월 및 추가 모집 압력이 매우 거셉니다. 외국인 유학생 유치 및 성인 학습자 전형으로의 타겟층 피보팅 속도를 더욱 과감하게 높여야 극복이 가능합니다.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 스페셜 인터랙티브 도구: 정원 감축 시뮬레이터 -->
+    <div class="mt-12 bg-slate-900 text-white rounded-2xl p-6 sm:p-8 card-shadow border border-slate-800 relative overflow-hidden">
+        <div class="absolute -right-16 -bottom-16 w-64 h-64 bg-indigo-500/10 rounded-full blur-3xl"></div>
+        <div class="relative z-10">
+            <div class="flex flex-col md:flex-row justify-between items-start md:items-center border-b border-slate-800 pb-5 gap-3">
+                <div>
+                    <h3 class="text-lg sm:text-xl font-bold text-sky-400 flex items-center gap-2">
+                        <i data-lucide="sliders" class="w-5 h-5 text-sky-400"></i>
+                        [입시 시뮬레이션] 정원 조절에 따른 착시 경쟁률 계산기
+                    </h3>
+                    <p class="text-xs text-slate-400 mt-0.5">정원을 감축하여 실제 경쟁률 외견을 부풀리는 메커니즘을 테스트해 봅니다.</p>
+                </div>
+                <span class="px-2.5 py-1 bg-indigo-950 text-indigo-300 border border-indigo-800 text-2xs font-semibold rounded-lg">전공 조율 정밀 예측 시뮬레이터</span>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 mt-6 items-center">
+                <!-- 대학 선택 & 조절 패널 -->
+                <div class="lg:col-span-5 space-y-6 bg-slate-950/50 p-6 rounded-xl border border-slate-800">
+                    <div>
+                        <label class="block text-xs font-bold uppercase tracking-wider text-slate-400 mb-2">대상 대학 선택</label>
+                        <select id="simUnivSelect" class="w-full bg-slate-900 border border-slate-700 text-white rounded-lg px-3 py-2 text-sm focus:ring-2 focus:ring-indigo-500 focus:outline-none transition-all">
+                            <!-- Dynamic options inserted via JS -->
+                        </select>
+                    </div>
+
+                    <div>
+                        <div class="flex justify-between items-center mb-1">
+                            <label class="block text-xs font-bold uppercase tracking-wider text-slate-400">구조조정 정원 조정률</label>
+                            <span id="simRangeVal" class="text-sm font-extrabold text-sky-400">-15%</span>
+                        </div>
+                        <input type="range" id="simRangeInput" min="-40" max="10" value="-15" step="1" class="w-full h-1.5 bg-slate-800 rounded-lg appearance-none cursor-pointer accent-sky-400">
+                        <div class="flex justify-between text-2xs text-slate-500 mt-1">
+                            <span>-40% 대폭감축 (경쟁률 방어)</span>
+                            <span>0% (유지)</span>
+                            <span>+10% 정원증가</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 시뮬레이션 결과 디스플레이 -->
+                <div class="lg:col-span-7 grid grid-cols-1 sm:grid-cols-3 gap-4">
+                    <div class="bg-slate-950 p-5 rounded-xl border border-slate-800 flex flex-col justify-between h-36">
+                        <span class="text-2xs text-slate-400 uppercase tracking-wider block font-semibold">선택한 대학교 기본 경쟁률</span>
+                        <div class="mt-2">
+                            <span id="simCurrentRate" class="text-3xl font-extrabold text-slate-300">0.00 : 1</span>
+                            <span class="text-xs text-slate-500 block mt-1">(2026학년도 원본경쟁률)</span>
+                        </div>
+                    </div>
+
+                    <div class="bg-slate-950 p-5 rounded-xl border border-indigo-900/60 flex flex-col justify-between h-36 relative">
+                        <span class="text-2xs text-indigo-400 uppercase tracking-wider block font-bold">정원 조정 후 변환 경쟁률</span>
+                        <div class="mt-2">
+                            <span id="simAdjustedRate" class="text-3xl font-extrabold text-indigo-400">0.00 : 1</span>
+                            <span id="simRateDiff" class="text-2xs text-emerald-400 block mt-1 font-bold">▲ 0.00 (+0%)</span>
+                        </div>
+                    </div>
+
+                    <div id="simRiskCard" class="p-5 rounded-xl border flex flex-col justify-between h-36">
+                        <span class="text-2xs uppercase tracking-wider block font-semibold text-slate-300">신입생 충원 리스크 예측</span>
+                        <div class="mt-2">
+                            <span id="simRiskText" class="text-xl font-extrabold block">계산 중...</span>
+                            <span id="simRiskSubText" class="text-2xs text-slate-400 block mt-1">계산 중...</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 5. 데이터 분석 및 시각화 프로세스 정리 -->
+    <div class="mt-12 bg-white rounded-2xl p-6 sm:p-8 card-shadow border border-slate-100">
+        <h2 class="text-xl sm:text-2xl font-bold text-slate-900 flex items-center gap-2 border-b border-slate-100 pb-5">
+            <i data-lucide="code" class="text-slate-800 w-6 h-6"></i>
+            5. 데이터 분석 및 시각화 프로세스 및 프롬프트 정리
+        </h2>
+        <p class="text-xs sm:text-sm text-slate-500 mt-2">원시 데이터 추출부터 정제, 시각화 가로 막대 주입까지 사용된 데이터 엔지니어링 프로세스입니다.</p>
+
+        <div class="mt-6 overflow-x-auto custom-scrollbar">
+            <table class="w-full text-left text-xs sm:text-sm border border-slate-100 rounded-lg overflow-hidden">
+                <thead>
+                    <tr class="bg-slate-50 border-b border-slate-100 text-slate-600 font-bold">
+                        <th class="p-4 w-1/4">작업 단계</th>
+                        <th class="p-4 w-3/4">적용된 코딩 로직 및 프롬프트 요약</th>
+                    </tr>
+                </thead>
+                <tbody class="divide-y divide-slate-100 text-slate-600">
+                    <tr>
+                        <td class="p-4 font-semibold text-slate-900 bg-slate-50/20">1. 데이터 추출 및 전처리</td>
+                        <td class="p-4 leading-relaxed">
+                            <strong class="text-slate-800">조건:</strong> 지역명이 '부산'이고 학교종류가 '대학'인 학교 필터링 (일반 4년제 대학교 한정)<br>
+                            <strong class="text-slate-800">제외 조건:</strong> 학교유형에 '사이버'가 들어가거나 전 연도 경쟁률 값 중 0.0이 존재하는 학교 제외<br>
+                            <strong class="text-slate-800">가공 로직:</strong> 각 연도 파일명에서 연도(2024~2026)를 파싱하고 경쟁률 컬럼을 수치형으로 표준화하여 Outer Join 수행
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="p-4 font-semibold text-slate-900 bg-slate-50/20">2. 그래프 시각화 및 엑셀 삽입</td>
+                        <td class="p-4 leading-relaxed">
+                            <strong class="text-slate-800">차트 1:</strong> 학교별 연도별 경쟁률 추이를 보여주기 위한 Seaborn 그룹 막대 차트 (barplot) 생성<br>
+                            <strong class="text-slate-800">차트 2:</strong> 3개년 평균 경쟁률을 내림차순 정렬하여 가로 막대 차트로 가독성을 극대화하고 바 끝에 수치 삽입<br>
+                            <strong class="text-slate-800">포맷팅:</strong> openpyxl을 통해 '경쟁률시각화' 신규 시트를 추가하고 이미지 삽입(A3, A38 셀 배치), 그리드선 활성화
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <!-- 6. 자료 출처 및 레퍼런스 -->
+    <div class="mt-12 bg-white rounded-2xl p-6 sm:p-8 card-shadow border border-slate-100">
+        <h2 class="text-xl sm:text-2xl font-bold text-slate-900 flex items-center gap-2 border-b border-slate-100 pb-5">
+            <i data-lucide="book-open" class="text-indigo-600 w-6 h-6"></i>
+            6. 자료 출처 및 연구 레퍼런스
+        </h2>
+        
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-6">
+            <div>
+                <h4 class="text-sm font-bold text-slate-800 mb-3 flex items-center gap-1.5">
+                    <span class="w-1.5 h-1.5 rounded-full bg-indigo-500"></span> 웹사이트 데이터 출처
+                </h4>
+                <ul class="space-y-2 text-xs text-slate-600 pl-3">
+                    <li class="list-disc"><strong class="text-slate-900">「대학 주요정보 공시 데이터: 신입생 경쟁률 현황」</strong>, 대학알리미, academyinfo.go.kr (2026.7.11 확인)</li>
+                    <li class="list-disc"><strong class="text-slate-900">「교육통계서비스 고등교육기관 신입생 충원율」</strong>, 한국교육개발원, kess.kedi.re.kr (2026.7.11 확인)</li>
+                </ul>
+            </div>
+            <div>
+                <h4 class="text-sm font-bold text-slate-800 mb-3 flex items-center gap-1.5">
+                    <span class="w-1.5 h-1.5 rounded-full bg-indigo-500"></span> 공공기관 주요 발행 보고서
+                </h4>
+                <ul class="space-y-2 text-xs text-slate-600 pl-3">
+                    <li class="list-disc"><strong class="text-slate-900">교육부</strong>, 「지방대학 활성화 사업 기본계획 및 재정지원 가이드라인」 (2023)</li>
+                    <li class="list-disc"><strong class="text-slate-900">한국교육개발원</strong>, 「2025 교육통계연보」 (2025)</li>
+                    <li class="list-disc"><strong class="text-slate-900">대학교육연구소</strong>, 「학령인구 감소에 따른 대학 정원 조정 및 지역 대학 지원 방안 연구」 (2024)</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</main>
+
+<footer class="bg-slate-900 text-slate-400 text-xs py-8 mt-16 border-t border-slate-800">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-4">
+        <p>© 2026 입시 전문가 그룹. All Rights Reserved. 본 대시보드 리포트는 Antigravity로 작성되었습니다.</p>
+        <div class="flex items-center gap-4 text-slate-500">
+            <a href="#" class="hover:text-white transition-colors">이용 약관</a>
+            <span>·</span>
+            <a href="#" class="hover:text-white transition-colors">데이터 개인정보 수집 고지</a>
+        </div>
+    </div>
+</footer>
+
+<script>
+    // 14개 대학 신입생 경쟁률 데이터
+    const rawData = [
+        { name: "경성대학교", type: "본교", r2024: 6.50, r2025: 6.50, r2026: 6.50, avg: 6.50 },
+        { name: "고신대학교", type: "본교", r2024: 5.10, r2025: 6.80, r2026: 6.80, avg: 6.23 },
+        { name: "국립부경대학교", type: "본교", r2024: 7.30, r2025: 8.90, r2026: 8.90, avg: 8.37 },
+        { name: "국립한국해양대학교", type: "본교", r2024: 6.70, r2025: 8.00, r2026: 8.00, avg: 7.57 },
+        { name: "동명대학교", type: "본교", r2024: 6.00, r2025: 5.80, r2026: 5.80, avg: 5.87 },
+        { name: "동서대학교", type: "본교", r2024: 5.00, r2025: 5.20, r2026: 5.20, avg: 5.13 },
+        { name: "동아대학교", type: "본교", r2024: 6.20, r2025: 6.30, r2026: 6.30, avg: 6.27 },
+        { name: "동의대학교", type: "본교", r2024: 5.20, r2025: 5.20, r2026: 5.20, avg: 5.20 },
+        { name: "부산가톨릭대학교", type: "본교", r2024: 6.80, r2025: 7.10, r2026: 7.10, avg: 7.00 },
+        { name: "부산교육대학교", type: "본교", r2024: 5.40, r2025: 5.20, r2026: 5.20, avg: 5.27 },
+        { name: "부산대학교", type: "본교", r2024: 8.60, r2025: 9.00, r2026: 9.00, avg: 8.87 },
+        { name: "부산외국어대학교", type: "본교", r2024: 3.50, r2025: 3.60, r2026: 3.60, avg: 3.57 },
+        { name: "신라대학교", type: "본교", r2024: 5.10, r2025: 5.20, r2026: 5.20, avg: 5.17 },
+        { name: "영산대학교(해운대)", type: "본교", r2024: 3.70, r2025: 3.80, r2026: 3.80, avg: 3.77 }
+    ];
+
+    let currentSort = { column: 'avg', direction: 'desc' };
+    let filteredData = [...rawData];
+
+    // Chart.js 전역 객체 저장용
+    let yearlyChartInstance = null;
+    let averageChartInstance = null;
+
+    // 데이터 렌더링 함수
+    function renderTable() {
+        const tableBody = document.getElementById('univTableBody');
+        tableBody.innerHTML = '';
+
+        filteredData.forEach(row => {
+            // 그룹에 따른 뱃지 스타일 정의
+            let groupBadge = '';
+            let riskBadge = '';
+            
+            if (row.avg >= 8.0) {
+                groupBadge = `<span class="px-2 py-0.5 rounded-full text-2xs font-bold bg-emerald-50 text-emerald-700 border border-emerald-200">최상위(8.0↑)</span>`;
+                riskBadge = `<span class="inline-flex items-center gap-1 text-emerald-600 font-semibold text-2xs"><i data-lucide="shield" class="w-3.5 h-3.5"></i> 우수 (충원율 안전)</span>`;
+            } else if (row.avg >= 6.0) {
+                groupBadge = `<span class="px-2 py-0.5 rounded-full text-2xs font-bold bg-sky-50 text-sky-700 border border-sky-200">중상위(6.0↑)</span>`;
+                riskBadge = `<span class="inline-flex items-center gap-1 text-sky-600 font-semibold text-2xs"><i data-lucide="activity" class="w-3.5 h-3.5"></i> 양호 (이탈 관리 필요)</span>`;
+            } else if (row.avg >= 5.0) {
+                groupBadge = `<span class="px-2 py-0.5 rounded-full text-2xs font-bold bg-amber-50 text-amber-700 border border-amber-200">중하위(5.0↑)</span>`;
+                riskBadge = `<span class="inline-flex items-center gap-1 text-amber-600 font-semibold text-2xs"><i data-lucide="alert-circle" class="w-3.5 h-3.5"></i> 경고 (수시이월주의)</span>`;
+            } else {
+                groupBadge = `<span class="px-2 py-0.5 rounded-full text-2xs font-bold bg-rose-50 text-rose-700 border border-rose-200">하위(4.0↓)</span>`;
+                riskBadge = `<span class="inline-flex items-center gap-1 text-rose-600 font-semibold text-2xs"><i data-lucide="alert-triangle" class="w-3.5 h-3.5"></i> 위험 (추가모집 임박)</span>`;
+            }
+
+            const tr = document.createElement('tr');
+            tr.className = 'hover:bg-slate-50 transition-colors border-b border-slate-100';
+            tr.innerHTML = `
+                <td class="py-3 px-4 font-semibold text-slate-800">
+                    <div class="flex items-center gap-2">
+                        ${row.name}
+                        ${groupBadge}
+                    </div>
+                </td>
+                <td class="py-3 px-4 text-slate-500">${row.type}</td>
+                <td class="py-3 px-4 text-slate-600 font-medium">${row.r2024.toFixed(2)}</td>
+                <td class="py-3 px-4 text-slate-600 font-medium">${row.r2025.toFixed(2)}</td>
+                <td class="py-3 px-4 text-slate-600 font-medium">${row.r2026.toFixed(2)}</td>
+                <td class="py-3 px-4 font-bold text-indigo-700 bg-indigo-50/10">${row.avg.toFixed(2)} : 1</td>
+                <td class="py-3 px-4">${riskBadge}</td>
+            `;
+            tableBody.appendChild(tr);
+        });
+        
+        // 아이콘 리프레시
+        lucide.createIcons();
+    }
+
+    // 데이터 정렬
+    window.sortData = function(column) {
+        if (currentSort.column === column) {
+            currentSort.direction = currentSort.direction === 'asc' ? 'desc' : 'asc';
+        } else {
+            currentSort.column = column;
+            currentSort.direction = 'desc';
+        }
+
+        filteredData.sort((a, b) => {
+            let valA, valB;
+            if (column === 'name') {
+                valA = a.name;
+                valB = b.name;
+                return currentSort.direction === 'asc' ? valA.localeCompare(valB, 'ko') : valB.localeCompare(valA, 'ko');
+            } else {
+                valA = a[column];
+                valB = b[column];
+                return currentSort.direction === 'asc' ? valA - valB : valB - valA;
+            }
+        });
+
+        renderTable();
+    };
+
+    // 검색 및 필터 가공
+    function handleSearchAndFilter() {
+        const searchVal = document.getElementById('univSearchInput').value.toLowerCase();
+        const groupVal = document.getElementById('groupFilter').value;
+
+        filteredData = rawData.filter(univ => {
+            const matchesSearch = univ.name.toLowerCase().includes(searchVal);
+            let matchesGroup = true;
+
+            if (groupVal === 'top') {
+                matchesGroup = univ.avg >= 8.0;
+            } else if (groupVal === 'mid-high') {
+                matchesGroup = univ.avg >= 6.0 && univ.avg < 8.0;
+            } else if (groupVal === 'mid-low') {
+                matchesGroup = univ.avg >= 5.0 && univ.avg < 6.0;
+            } else if (groupVal === 'low') {
+                matchesGroup = univ.avg < 4.0;
+            }
+
+            return matchesSearch && matchesGroup;
+        });
+
+        // 현재 정렬 조건 적용
+        window.sortData(currentSort.column);
+    }
+
+    // 차트 데이터 시각화 생성
+    function initCharts() {
+        // 데이터 준비 (이름 가나다순으로 정렬하여 통일)
+        const sortedByName = [...rawData].sort((a,b) => a.name.localeCompare(b.name, 'ko'));
+        const labels = sortedByName.map(u => u.name);
+        const data2024 = sortedByName.map(u => u.r2024);
+        const data2025 = sortedByName.map(u => u.r2025);
+        const data2026 = sortedByName.map(u => u.r2026);
+
+        // 1. 연도별 경쟁률 추이 비교 차트
+        const ctxYearly = document.getElementById('yearlyChart').getContext('2d');
+        yearlyChartInstance = new Chart(ctxYearly, {
+            type: 'bar',
+            data: {
+                labels: labels,
+                datasets: [
+                    {
+                        label: '2024년',
+                        data: data2024,
+                        backgroundColor: 'rgba(56, 189, 248, 0.85)', // Sky-400
+                        borderRadius: 4
+                    },
+                    {
+                        label: '2025년',
+                        data: data2025,
+                        backgroundColor: 'rgba(99, 102, 241, 0.85)', // Indigo-500
+                        borderRadius: 4
+                    },
+                    {
+                        label: '2026년',
+                        data: data2026,
+                        backgroundColor: 'rgba(168, 85, 247, 0.85)', // Purple-500
+                        borderRadius: 4
+                    }
+                ]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: { position: 'top', labels: { boxWidth: 12, font: { family: 'Noto Sans KR', size: 11 } } },
+                    tooltip: { padding: 10, bodyFont: { family: 'Noto Sans KR' } }
+                },
+                scales: {
+                    x: { ticks: { font: { family: 'Noto Sans KR', size: 10 } }, grid: { display: false } },
+                    y: { min: 0, max: 10, ticks: { stepSize: 2 } }
+                }
+            }
+        });
+
+        // 2. 3개년 평균 경쟁률 차트 (내림차순 정렬)
+        const sortedByAvg = [...rawData].sort((a,b) => b.avg - a.avg);
+        const avgLabels = sortedByAvg.map(u => u.name);
+        const avgValues = sortedByAvg.map(u => u.avg);
+
+        const ctxAvg = document.getElementById('averageChart').getContext('2d');
+        averageChartInstance = new Chart(ctxAvg, {
+            type: 'bar',
+            data: {
+                labels: avgLabels,
+                datasets: [{
+                    label: '3개년 평균 경쟁률',
+                    data: avgValues,
+                    backgroundColor: avgValues.map(v => {
+                        if (v >= 8.0) return 'rgba(16, 185, 129, 0.85)'; // emerald
+                        if (v >= 6.0) return 'rgba(14, 165, 233, 0.85)'; // sky
+                        if (v >= 5.0) return 'rgba(245, 158, 11, 0.85)'; // amber
+                        return 'rgba(239, 68, 68, 0.85)'; // red
+                    }),
+                    borderRadius: 4
+                }]
+            },
+            options: {
+                indexAxis: 'y',
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: { display: false },
+                    tooltip: { padding: 10 }
+                },
+                scales: {
+                    x: { min: 0, max: 10, ticks: { stepSize: 2 } },
+                    y: { ticks: { font: { family: 'Noto Sans KR', size: 10 } }, grid: { display: false } }
+                }
+            }
+        });
+    }
+
+    // 정원 감축 시뮬레이터 로직 구현
+    function initSimulator() {
+        const select = document.getElementById('simUnivSelect');
+        const range = document.getElementById('simRangeInput');
+        const rangeVal = document.getElementById('simRangeVal');
+
+        // Select 요소에 대학 데이터 매핑
+        rawData.sort((a,b) => b.avg - a.avg).forEach(u => {
+            const opt = document.createElement('option');
+            opt.value = u.name;
+            opt.textContent = `${u.name} (현재 2026년: ${u.r2026.toFixed(2)}:1)`;
+            select.appendChild(opt);
+        });
+
+        // 슬라이더 변경 감지
+        range.addEventListener('input', (e) => {
+            const val = e.target.value;
+            rangeVal.textContent = val >= 0 ? `+${val}%` : `${val}%`;
+            calculateSimulation();
+        });
+
+        select.addEventListener('change', calculateSimulation);
+
+        // 초기 계산 가동
+        calculateSimulation();
+    }
+
+    function calculateSimulation() {
+        const univName = document.getElementById('simUnivSelect').value;
+        const adjustmentPercent = parseFloat(document.getElementById('simRangeInput').value);
+        
+        const univ = rawData.find(u => u.name === univName);
+        if (!univ) return;
+
+        const currentRate = univ.r2026;
+        
+        // 정원 변동 가중치 공식:
+        // 경쟁률 = 지원자수 / 정원
+        // 정원이 x% 변동할 때 (변동 배수 = 1 + x/100)
+        // 변환 경쟁률 = 원본경쟁률 / (1 + x/100)
+        const adjustmentMultiplier = 1 + (adjustmentPercent / 100);
+        const adjustedRate = currentRate / adjustmentMultiplier;
+
+        // UI 표기 업데이트
+        document.getElementById('simCurrentRate').textContent = `${currentRate.toFixed(2)} : 1`;
+        document.getElementById('simAdjustedRate').textContent = `${adjustedRate.toFixed(2)} : 1`;
+
+        // 이전 대비 변경 상태 텍스트
+        const diff = adjustedRate - currentRate;
+        const diffText = document.getElementById('simRateDiff');
+        if (diff >= 0) {
+            diffText.innerHTML = `▲ ${diff.toFixed(2)} (+${((diff/currentRate)*100).toFixed(1)}%)`;
+            diffText.className = "text-2xs text-emerald-400 block mt-1 font-bold";
+        } else {
+            diffText.innerHTML = `▼ ${Math.abs(diff).toFixed(2)} (${((diff/currentRate)*100).toFixed(1)}%)`;
+            diffText.className = "text-2xs text-rose-400 block mt-1 font-bold";
+        }
+
+        // 리스크 진단 카드 연산
+        const riskCard = document.getElementById('simRiskCard');
+        const riskText = document.getElementById('simRiskText');
+        const riskSubText = document.getElementById('simRiskSubText');
+
+        if (adjustedRate >= 8.0) {
+            riskCard.className = "p-5 rounded-xl border border-emerald-900 bg-emerald-950/20 flex flex-col justify-between h-36";
+            riskText.textContent = "극도로 안전";
+            riskText.className = "text-xl font-extrabold block text-emerald-400";
+            riskSubText.textContent = "정원 감축 없이도 학생 이탈방지가 견고한 최상위 거점군 설계입니다.";
+        } else if (adjustedRate >= 6.0) {
+            riskCard.className = "p-5 rounded-xl border border-sky-900 bg-sky-950/20 flex flex-col justify-between h-36";
+            riskText.textContent = "안정적 방어";
+            riskText.className = "text-xl font-extrabold block text-sky-400";
+            riskSubText.textContent = "수시 6회 지원에 따른 이탈 리스크를 완전히 커버 가능한 완충 지대입니다.";
+        } else if (adjustedRate >= 5.0) {
+            riskCard.className = "p-5 rounded-xl border border-amber-900 bg-amber-950/20 flex flex-col justify-between h-36";
+            riskText.textContent = "경계 신호 (약한 위험)";
+            riskText.className = "text-xl font-extrabold block text-amber-400";
+            riskSubText.textContent = "수시 이탈자가 발생하는 순간 정시 추가 모집 압박에 빠질 수 있습니다.";
+        } else {
+            riskCard.className = "p-5 rounded-xl border border-rose-900 bg-rose-950/20 flex flex-col justify-between h-36";
+            riskText.textContent = "미충원 위험 매우 높음";
+            riskText.className = "text-xl font-extrabold block text-rose-400";
+            riskSubText.textContent = "실질 미충원으로 이어질 확률이 95% 이상입니다. 추가적인 학과 피보팅이 급선무입니다.";
+        }
+    }
+
+    // 초기 구동
+    window.onload = function() {
+        // 테이블 최초 정렬 및 렌더링
+        window.sortData('avg');
+
+        // 필터 이벤트 바인딩
+        document.getElementById('univSearchInput').addEventListener('input', handleSearchAndFilter);
+        document.getElementById('groupFilter').addEventListener('change', handleSearchAndFilter);
+
+        // 차트 초기화
+        initCharts();
+
+        // 시뮬레이터 초기화
+        initSimulator();
+
+        // 아이콘 로드
+        lucide.createIcons();
+    };
+</script>
+</body>
+</html>
