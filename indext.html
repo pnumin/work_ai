@@ -1,0 +1,732 @@
+<!DOCTYPE html>
+<html lang="ko" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>김다온의 데이터 & IT 포트폴리오</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <!-- FontAwesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Noto+Sans+KR:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+    
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Noto Sans KR', 'Inter', 'sans-serif'],
+                    },
+                    colors: {
+                        brand: {
+                            50: '#f0f7ff',
+                            100: '#e0effe',
+                            500: '#3b82f6',
+                            600: '#2563eb',
+                            700: '#1d4ed8',
+                            900: '#1e3a8a',
+                        }
+                    },
+                    boxShadow: {
+                        'premium': '0 10px 30px -10px rgba(0, 0, 0, 0.1)',
+                        'premium-dark': '0 10px 30px -10px rgba(0, 0, 0, 0.5)',
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .glass {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+        }
+        .dark .glass {
+            background: rgba(15, 23, 42, 0.8);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+        }
+        .gradient-text {
+            background: linear-gradient(135deg, #3b82f6 0%, #8b5cf6 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 6px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #cbd5e1;
+            border-radius: 10px;
+        }
+        .dark .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #475569;
+        }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-800 dark:bg-slate-950 dark:text-slate-100 min-h-screen transition-colors duration-300 font-sans">
+
+    <!-- Navigation Bar -->
+    <nav class="sticky top-0 z-40 w-full glass border-b border-slate-200/50 dark:border-slate-800/50 transition-all duration-300">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16">
+                <div class="flex items-center gap-2">
+                    <span class="w-8 h-8 rounded-lg bg-gradient-to-br from-blue-500 to-indigo-600 flex items-center justify-center text-white font-black text-lg shadow-md shadow-blue-500/30">D</span>
+                    <span class="font-extrabold text-xl tracking-tight bg-gradient-to-r from-blue-600 to-indigo-600 dark:from-blue-400 dark:to-indigo-400 bg-clip-text text-transparent">DAON PORTFOLIO</span>
+                </div>
+                <div class="hidden md:flex items-center gap-8 font-medium">
+                    <a href="#hero" class="hover:text-blue-500 transition-colors">홈</a>
+                    <a href="#cards" class="hover:text-blue-500 transition-colors">핵심 프로젝트</a>
+                </div>
+                <div class="flex items-center gap-4">
+                    <!-- Dark/Light Mode Button -->
+                    <button id="themeToggleBtn" onclick="toggleTheme()" class="p-2 rounded-full hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-600 dark:text-slate-300 transition-all">
+                        <i id="themeIcon" class="fa-solid fa-moon text-lg"></i>
+                    </button>
+                    <!-- Contact Tag -->
+                    <span class="hidden sm:inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-emerald-50 text-emerald-700 border border-emerald-200 dark:bg-emerald-950/30 dark:text-emerald-400 dark:border-emerald-800/50">
+                        <span class="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span>
+                        Active Student
+                    </span>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <header id="hero" class="relative overflow-hidden pt-12 pb-20 md:py-28">
+        <!-- Interactive background grid & shapes -->
+        <div class="absolute inset-0 -z-10 bg-[linear-gradient(to_right,#8080800a_1px,transparent_1px),linear-gradient(to_bottom,#8080800a_1px,transparent_1px)] bg-[size:14px_24px] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_0%,#000_70%,transparent_100%)]"></div>
+        <div class="absolute top-20 left-10 w-72 h-72 bg-blue-400/20 rounded-full blur-3xl dark:bg-blue-600/10 animate-pulse"></div>
+        <div class="absolute bottom-10 right-10 w-80 h-80 bg-purple-400/20 rounded-full blur-3xl dark:bg-purple-600/10 animate-pulse" style="animation-delay: 2s;"></div>
+
+        <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative">
+            <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-blue-50 text-blue-700 border border-blue-200 dark:bg-blue-950/50 dark:text-blue-300 dark:border-blue-900/50 mb-6">
+                🎓 고등학교 학업역량 & 빅데이터 탐구 기록
+            </span>
+            <h1 class="text-4xl sm:text-5xl md:text-6xl font-black tracking-tight leading-tight mb-6">
+                데이터로 세상을 해석하는<br/>
+                고등학생 <span class="gradient-text">김다온</span>입니다
+            </h1>
+            <p class="text-base sm:text-lg md:text-xl text-slate-600 dark:text-slate-300 max-w-2xl mx-auto mb-10 leading-relaxed">
+                부산의 지역 교육 현황과 관심 학과 트렌드를 분석하며 데이터 과학자의 꿈을 키워가고 있습니다. 데이터를 기반으로 문제를 발굴하고, 시각적 통찰을 도출하는 활동을 좋아합니다.
+            </p>
+            <div class="flex flex-col sm:flex-row justify-center items-center gap-4">
+                <a href="#cards" class="w-full sm:w-auto px-8 py-4 rounded-xl font-bold text-white bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 shadow-lg shadow-blue-500/20 dark:shadow-none hover:scale-[1.02] active:scale-[0.98] transition-all text-center">
+                    포트폴리오 카드 탐색하기
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Core Portfolio Cards Section -->
+    <main id="cards" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        <div class="text-center mb-16">
+            <h2 class="text-3xl font-bold tracking-tight mb-3">포트폴리오 핵심 주제</h2>
+            <p class="text-slate-500 dark:text-slate-400">카드를 선택해 세부 연구 내용과 차트 분석 결과를 확인해 보세요.</p>
+        </div>
+
+        <!-- Cards Grid -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+            
+            <!-- Card 1: About Me -->
+            <div onclick="openModal('intro')" class="group relative flex flex-col justify-between p-8 rounded-3xl bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800/80 shadow-premium dark:shadow-premium-dark hover:shadow-2xl dark:hover:shadow-indigo-500/10 cursor-pointer transition-all duration-300 hover:-translate-y-2">
+                <div>
+                    <div class="w-14 h-14 rounded-2xl bg-blue-50 dark:bg-blue-950/50 flex items-center justify-center text-blue-600 dark:text-blue-400 mb-6 group-hover:scale-110 transition-transform">
+                        <i class="fa-solid fa-user-graduate text-2xl"></i>
+                    </div>
+                    <span class="text-xs font-semibold tracking-wider text-blue-600 dark:text-blue-400 uppercase">My Identity</span>
+                    <h3 class="text-2xl font-bold mt-2 mb-4 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">꿈을 코딩하는 나, 이력 및 철학</h3>
+                    <p class="text-slate-600 dark:text-slate-300 text-sm leading-relaxed">
+                        파이썬과 데이터 분석 도구를 다루는 고등학생 김다온입니다. 교내 수학-소프트웨어 융합 동아리 활동, 데이터 분석 동기 및 기술 스택 일람을 담았습니다.
+                    </p>
+                </div>
+                <div class="mt-8 pt-4 border-t border-slate-100 dark:border-slate-800 flex items-center justify-between">
+                    <span class="text-sm font-semibold text-slate-500 dark:text-slate-400">자세히 보기</span>
+                    <i class="fa-solid fa-arrow-right text-blue-500 transform group-hover:translate-x-1.5 transition-transform"></i>
+                </div>
+            </div>
+
+            <!-- Card 2: Busan Admissions Analysis -->
+            <div onclick="openModal('busan')" class="group relative flex flex-col justify-between p-8 rounded-3xl bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800/80 shadow-premium dark:shadow-premium-dark hover:shadow-2xl dark:hover:shadow-violet-500/10 cursor-pointer transition-all duration-300 hover:-translate-y-2">
+                <div>
+                    <div class="w-14 h-14 rounded-2xl bg-violet-50 dark:bg-violet-950/50 flex items-center justify-center text-violet-600 dark:text-violet-400 mb-6 group-hover:scale-110 transition-transform">
+                        <i class="fa-solid fa-chart-line text-2xl"></i>
+                    </div>
+                    <span class="text-xs font-semibold tracking-wider text-violet-600 dark:text-violet-400 uppercase">Region Analysis</span>
+                    <h3 class="text-2xl font-bold mt-2 mb-4 group-hover:text-violet-600 dark:group-hover:text-violet-400 transition-colors">부산 지역 신입생 경쟁률 분석</h3>
+                    <p class="text-slate-600 dark:text-slate-300 text-sm leading-relaxed">
+                        학령인구 감소 속에서도 변동을 보이는 2025-2026학년도 부산 주요 대학(부산대, 부경대, 동아대 등)의 입시 전형별 경쟁률을 차트로 시각화하고 인사이트를 해석합니다.
+                    </p>
+                </div>
+                <div class="mt-8 pt-4 border-t border-slate-100 dark:border-slate-800 flex items-center justify-between">
+                    <span class="text-sm font-semibold text-slate-500 dark:text-slate-400">자세히 보기</span>
+                    <i class="fa-solid fa-arrow-right text-violet-500 transform group-hover:translate-x-1.5 transition-transform"></i>
+                </div>
+            </div>
+
+            <!-- Card 3: Department of Interest Analysis -->
+            <div onclick="openModal('department')" class="group relative flex flex-col justify-between p-8 rounded-3xl bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800/80 shadow-premium dark:shadow-premium-dark hover:shadow-2xl dark:hover:shadow-emerald-500/10 cursor-pointer transition-all duration-300 hover:-translate-y-2">
+                <div>
+                    <div class="w-14 h-14 rounded-2xl bg-emerald-50 dark:bg-emerald-950/50 flex items-center justify-center text-emerald-600 dark:text-emerald-400 mb-6 group-hover:scale-110 transition-transform">
+                        <i class="fa-solid fa-lightbulb text-2xl"></i>
+                    </div>
+                    <span class="text-xs font-semibold tracking-wider text-emerald-600 dark:text-emerald-400 uppercase">Major Trend</span>
+                    <h3 class="text-2xl font-bold mt-2 mb-4 group-hover:text-emerald-600 dark:group-hover:text-emerald-400 transition-colors">관심 학과(인공지능·컴공) 분석</h3>
+                    <p class="text-slate-600 dark:text-slate-300 text-sm leading-relaxed">
+                        미래 먹거리인 인공지능융합공학과 및 컴퓨터공학과 트렌드와 선배들의 합격 역량을 분석했습니다. 제가 고등학교에서 준비해 온 역량 로드맵 지표도 보여드립니다.
+                    </p>
+                </div>
+                <div class="mt-8 pt-4 border-t border-slate-100 dark:border-slate-800 flex items-center justify-between">
+                    <span class="text-sm font-semibold text-slate-500 dark:text-slate-400">자세히 보기</span>
+                    <i class="fa-solid fa-arrow-right text-emerald-500 transform group-hover:translate-x-1.5 transition-transform"></i>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <!-- Modal Backdrop -->
+    <div id="modalBackdrop" class="fixed inset-0 z-50 hidden bg-slate-950/60 backdrop-blur-sm flex items-center justify-center p-4">
+        
+        <!-- Modal Content Container -->
+        <div id="modalContainer" class="relative bg-white dark:bg-slate-900 rounded-3xl w-full max-w-4xl h-[85vh] flex flex-col overflow-hidden shadow-2xl border border-slate-200 dark:border-slate-800 transform scale-95 opacity-0 transition-all duration-300">
+            
+            <!-- Modal Header -->
+            <div class="flex items-center justify-between p-6 border-b border-slate-100 dark:border-slate-800">
+                <div class="flex items-center gap-3">
+                    <div id="modalIconContainer" class="w-10 h-10 rounded-xl flex items-center justify-center text-white">
+                        <!-- Icon injected by JS -->
+                    </div>
+                    <div>
+                        <span id="modalCategory" class="text-xs font-bold uppercase tracking-wider text-slate-400"></span>
+                        <h3 id="modalTitle" class="text-xl font-bold"></h3>
+                    </div>
+                </div>
+                <button onclick="closeModal()" class="w-10 h-10 rounded-full bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 flex items-center justify-center text-slate-600 dark:text-slate-300 transition-all">
+                    <i class="fa-solid fa-xmark text-lg"></i>
+                </button>
+            </div>
+
+    <!-- Footer -->
+    <footer class="border-t border-slate-200/50 dark:border-slate-800/50 py-12 text-center text-sm text-slate-400">
+        <p>© 2026 Highschooler Kim Daon. All Rights Reserved.</p>
+        <p class="mt-2 text-xs text-slate-500">데이터 수집 및 시각화 도구: Python Pandas, Chart.js, Tailwind CSS</p>
+    </footer>
+
+    <script>
+        // Set Theme initially based on OS preference or localStorage
+        if (localStorage.getItem('color-theme') === 'dark' || (!('color-theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+            document.documentElement.classList.add('dark');
+            document.getElementById('themeIcon').className = 'fa-solid fa-sun text-lg text-amber-400';
+        } else {
+            document.documentElement.classList.remove('dark');
+            document.getElementById('themeIcon').className = 'fa-solid fa-moon text-lg';
+        }
+
+        function toggleTheme() {
+            if (document.documentElement.classList.contains('dark')) {
+                document.documentElement.classList.remove('dark');
+                localStorage.setItem('color-theme', 'light');
+                document.getElementById('themeIcon').className = 'fa-solid fa-moon text-lg';
+            } else {
+                document.documentElement.classList.add('dark');
+                localStorage.setItem('color-theme', 'dark');
+                document.getElementById('themeIcon').className = 'fa-solid fa-sun text-lg text-amber-400';
+            }
+            // Redraw charts if modal is active, because grid colors might change
+            if (activeChart1) rebuildBusanCharts();
+            if (activeChart3) rebuildDeptCharts();
+        }
+
+        // Global Chart Instance References for safe rebuilding on resize/darkmode switch
+        let activeChart1 = null;
+        let activeChart2 = null;
+        let activeChart3 = null;
+        let activeChart4 = null;
+
+        // Custom Show Toast function instead of alert
+        function showToast(message) {
+            const toast = document.getElementById('toast');
+            const toastText = document.getElementById('toastText');
+            toastText.textContent = message;
+            toast.classList.remove('hidden');
+            setTimeout(() => {
+                toast.classList.remove('translate-y-10', 'opacity-0');
+            }, 50);
+            
+            setTimeout(() => {
+                toast.classList.add('translate-y-10', 'opacity-0');
+                setTimeout(() => {
+                    toast.classList.add('hidden');
+                }, 300);
+            }, 3000);
+        }
+
+        // Modal Control Functions
+        function openModal(topic) {
+            const backdrop = document.getElementById('modalBackdrop');
+            const container = document.getElementById('modalContainer');
+            const iconContainer = document.getElementById('modalIconContainer');
+            const category = document.getElementById('modalCategory');
+            const title = document.getElementById('modalTitle');
+            const body = document.getElementById('modalBody');
+
+            // Prevent Background Scrolling
+            document.body.style.overflow = 'hidden';
+
+            // Reset Scroll to top
+            body.scrollTop = 0;
+
+            // Setup Details based on selection
+            if (topic === 'intro') {
+                iconContainer.className = 'w-10 h-10 rounded-xl flex items-center justify-center text-white bg-blue-500';
+                iconContainer.innerHTML = '<i class="fa-solid fa-user-graduate"></i>';
+                category.textContent = 'My Identity';
+                title.textContent = '자기소개 및 활동 타임라인';
+                body.innerHTML = `
+                    <div class="space-y-8">
+                        <div class="flex flex-col md:flex-row gap-6 items-center">
+                            <div class="w-32 h-32 rounded-3xl bg-gradient-to-br from-blue-400 to-indigo-600 flex items-center justify-center text-white text-5xl font-bold shadow-md">
+                                다온
+                            </div>
+                            <div class="space-y-2 text-center md:text-left">
+                                <h4 class="text-2xl font-bold">김다온 (Kim Daon)</h4>
+                                <p class="text-blue-500 dark:text-blue-400 font-semibold text-sm">부산 센텀소프트고등학교 2학년 (데이터분석 전공)</p>
+                                <div class="flex flex-wrap gap-2 justify-center md:justify-start">
+                                    <span class="px-2.5 py-0.5 rounded-md text-xs font-semibold bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300">#Python_Pandas</span>
+                                    <span class="px-2.5 py-0.5 rounded-md text-xs font-semibold bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300">#데이터_시각화</span>
+                                    <span class="px-2.5 py-0.5 rounded-md text-xs font-semibold bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300">#웹_프론트엔드</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Vision & Mindset -->
+                        <div class="bg-blue-50/50 dark:bg-blue-950/20 p-6 rounded-2xl border border-blue-100/30 dark:border-blue-900/30">
+                            <h5 class="font-bold text-lg text-blue-600 dark:text-blue-400 mb-2">🎯 저의 비전</h5>
+                            <p class="text-sm text-slate-600 dark:text-slate-300 leading-relaxed">
+                                숫자로 흩어져 있는 사회 현상들을 수집하고 시각화하여, 누구나 직관적으로 우리 사회의 문제를 인지하고 해결을 고민할 수 있는 '데이터 민주화'에 이바지하고 싶습니다. 단순한 암기 학습을 넘어 실증적인 통계와 코딩으로 저만의 스토리를 만들어가고 있습니다.
+                            </p>
+                        </div>
+
+                        <!-- Technical Skills -->
+                        <div>
+                            <h5 class="font-bold text-lg mb-4 flex items-center gap-2"><i class="fa-solid fa-screwdriver-wrench text-blue-500"></i> 사용 가능한 기술 스택</h5>
+                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                                <div class="p-4 bg-slate-50 dark:bg-slate-800/50 rounded-xl">
+                                    <div class="flex justify-between font-bold text-sm mb-1.5">
+                                        <span>Python (Pandas, Numpy)</span>
+                                        <span class="text-blue-500">80%</span>
+                                    </div>
+                                    <div class="w-full h-2 bg-slate-200 dark:bg-slate-700 rounded-full overflow-hidden">
+                                        <div class="h-full bg-blue-500 rounded-full" style="width: 80%"></div>
+                                    </div>
+                                    <p class="text-xs text-slate-400 mt-1">공공 데이터 수집, 데이터 정제, 상관관계 분석 수행 가능</p>
+                                </div>
+                                <div class="p-4 bg-slate-50 dark:bg-slate-800/50 rounded-xl">
+                                    <div class="flex justify-between font-bold text-sm mb-1.5">
+                                        <span>Chart.js & Web Visualizations</span>
+                                        <span class="text-violet-500">75%</span>
+                                    </div>
+                                    <div class="w-full h-2 bg-slate-200 dark:bg-slate-700 rounded-full overflow-hidden">
+                                        <div class="h-full bg-violet-500 rounded-full" style="width: 75%"></div>
+                                    </div>
+                                    <p class="text-xs text-slate-400 mt-1">데이터 분석 모델을 직관적인 웹 대시보드로 시각화</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Timeline / Achievements -->
+                        <div>
+                            <h5 class="font-bold text-lg mb-6 flex items-center gap-2"><i class="fa-solid fa-timeline text-blue-500"></i> 주요 활동 및 연구 이력</h5>
+                            <div class="space-y-6 relative border-l border-slate-200 dark:border-slate-800 pl-4 ml-2">
+                                <div class="relative">
+                                    <div class="absolute -left-[21px] top-1 w-3.5 h-3.5 rounded-full bg-blue-500 border-4 border-white dark:border-slate-900"></div>
+                                    <span class="text-xs font-bold text-blue-500">2026.04 ~ 현재</span>
+                                    <h6 class="font-bold text-base mt-1">교내 융합 소프트웨어 동아리 "D-Vision" 회장</h6>
+                                    <p class="text-xs text-slate-500 dark:text-slate-400 mt-1">
+                                        교우들의 진로 탐구와 부산 지역 고교생 입시 빅데이터 분석 공동 프로젝트를 주도하며 데이터 협업 능력을 함양하고 있습니다.
+                                    </p>
+                                </div>
+                                <div class="relative">
+                                    <div class="absolute -left-[21px] top-1 w-3.5 h-3.5 rounded-full bg-indigo-500 border-4 border-white dark:border-slate-900"></div>
+                                    <span class="text-xs font-bold text-indigo-500">2025.10</span>
+                                    <h6 class="font-bold text-base mt-1">부산 고등학생 ICT 성과 발표회 우수상 수상</h6>
+                                    <p class="text-xs text-slate-500 dark:text-slate-400 mt-1">
+                                        부산 지역 대중교통 승하차 빅데이터를 활용한 '학생 전용 버스 노선 개선안'을 분석/발표하여 지역 공헌 연구 부문 우수상을 받았습니다.
+                                    </p>
+                                </div>
+                                <div class="relative">
+                                    <div class="absolute -left-[21px] top-1 w-3.5 h-3.5 rounded-full bg-purple-500 border-4 border-white dark:border-slate-900"></div>
+                                    <span class="text-xs font-bold text-purple-500">2025.05</span>
+                                    <h6 class="font-bold text-base mt-1">파이썬을 활용한 기초 통계분석 프로젝트</h6>
+                                    <p class="text-xs text-slate-500 dark:text-slate-400 mt-1">
+                                        부산 교육 통계 공공 데이터를 수집하고 정제하여 인근 중·고교 신입생 감소 수치를 예측하고 시각화하는 첫 데이터 프로젝트를 완료했습니다.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            } else if (topic === 'busan') {
+                iconContainer.className = 'w-10 h-10 rounded-xl flex items-center justify-center text-white bg-violet-500';
+                iconContainer.innerHTML = '<i class="fa-solid fa-chart-line"></i>';
+                category.textContent = 'Region Analysis';
+                title.textContent = '부산지역 대학교 신입생 경쟁률 심층 분석';
+                body.innerHTML = `
+                    <div class="space-y-8">
+                        <div class="bg-violet-50/50 dark:bg-violet-950/20 p-5 rounded-2xl border border-violet-100/30 dark:border-violet-900/30 text-sm leading-relaxed">
+                            <span class="font-bold text-violet-600 dark:text-violet-400">📊 연구 개요:</span> 
+                            학령인구 감소로 인한 수도권 쏠림 현상 속에서, 2025-2026학년도 부산지역 대학교의 입시 경쟁률 데이터를 직접 수집하여 시각화했습니다. 지역 명문 거점국립대학과 해양·수산 특성화 대학, 사립 명문대들의 경쟁률 판도 변화를 보여드립니다.
+                        </div>
+
+                        <!-- Charts Layout Grid -->
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <div class="p-4 bg-slate-50 dark:bg-slate-800/30 rounded-2xl border border-slate-200/50 dark:border-slate-800">
+                                <h5 class="text-xs font-extrabold text-slate-400 uppercase tracking-widest mb-4">부산 4년제 주요 대학 수시 평균경쟁률 (2026학년도 기준)</h5>
+                                <div class="relative h-[250px] w-full">
+                                    <canvas id="busanSusiChart"></canvas>
+                                </div>
+                            </div>
+                            <div class="p-4 bg-slate-50 dark:bg-slate-800/30 rounded-2xl border border-slate-200/50 dark:border-slate-800">
+                                <h5 class="text-xs font-extrabold text-slate-400 uppercase tracking-widest mb-4">부산대학교 최근 3개년 정시/수시 경쟁률 추이</h5>
+                                <div class="relative h-[250px] w-full">
+                                    <canvas id="busanTrendChart"></canvas>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- High Schooler's Insight -->
+                        <div class="space-y-4">
+                            <h5 class="font-bold text-lg flex items-center gap-2"><i class="fa-solid fa-magnifying-glass-chart text-violet-500"></i> 김다온의 데이터 인사이트</h5>
+                            
+                            <div class="space-y-3 text-sm text-slate-600 dark:text-slate-300">
+                                <div class="flex gap-2 items-start bg-white dark:bg-slate-900 p-3 rounded-xl border border-slate-100 dark:border-slate-800">
+                                    <span class="w-5 h-5 rounded bg-violet-100 dark:bg-violet-950 text-violet-600 dark:text-violet-400 flex items-center justify-center font-bold text-xs shrink-0">1</span>
+                                    <p>
+                                        <strong class="text-slate-800 dark:text-white">특성화와 거점국립대의 견고함:</strong> 부산지역 수시 전체 평균은 6대 1 수준으로 다소 위기가 있지만, <span class="text-violet-500 font-semibold">부산대(10.08대 1)</span> 및 <span class="text-violet-500 font-semibold">부경대(8.7대 1)</span> 등 해양/수산 특성화 및 거점 국립대들의 지표는 작년에 이어 높은 경쟁률을 유지하여 지역 대학으로서의 뚜렷한 경쟁력을 입증하고 있습니다.
+                                    </p>
+                                </div>
+                                <div class="flex gap-2 items-start bg-white dark:bg-slate-900 p-3 rounded-xl border border-slate-100 dark:border-slate-800">
+                                    <span class="w-5 h-5 rounded bg-violet-100 dark:bg-violet-950 text-violet-600 dark:text-violet-400 flex items-center justify-center font-bold text-xs shrink-0">2</span>
+                                    <p>
+                                        <strong class="text-slate-800 dark:text-white">정시 지원 양극화 및 상향 안전 동시 현상:</strong> 정시에서 의학계열 강세와 더불어, 우수한 신설 첨단 학과(스마트시티, AI융합 등)로 지원이 쏠리는 양극화 패턴이 확인됩니다. 지역 사립대학 중에도 특성화 모집단위의 경쟁률이 특히 상승한 것이 특징입니다.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                `;
+                // Build charts after modal contents are rendered
+                setTimeout(() => {
+                    rebuildBusanCharts();
+                }, 150);
+            } else if (topic === 'department') {
+                iconContainer.className = 'w-10 h-10 rounded-xl flex items-center justify-center text-white bg-emerald-500';
+                iconContainer.innerHTML = '<i class="fa-solid fa-lightbulb"></i>';
+                category.textContent = 'Major Trend';
+                title.textContent = '관심학과(인공지능·컴퓨터공학) 트렌드 및 역량 분석';
+                body.innerHTML = `
+                    <div class="space-y-8">
+                        <div class="bg-emerald-50/50 dark:bg-emerald-950/20 p-5 rounded-2xl border border-emerald-100/30 dark:border-emerald-900/30 text-sm leading-relaxed">
+                            <span class="font-bold text-emerald-600 dark:text-emerald-400">🎓 전공 탐구 소개:</span> 
+                            제가 지원하고자 하는 <span class="text-emerald-600 dark:text-emerald-400 font-bold">인공지능융합학과 및 컴퓨터공학과</span>의 전국적 트렌드와 해당 분야에서 요구하는 5대 핵심 역량을 분석했습니다. 아울러 고교 생활 동안 제가 구축해 온 역량 점수를 스스로 진단해 보았습니다.
+                        </div>
+
+                        <!-- Chart layout -->
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <div class="p-4 bg-slate-50 dark:bg-slate-800/30 rounded-2xl border border-slate-200/50 dark:border-slate-800">
+                                <h5 class="text-xs font-extrabold text-slate-400 uppercase tracking-widest mb-4">인공지능 vs 일반 소프트웨어 학과 경쟁률 추이</h5>
+                                <div class="relative h-[250px] w-full">
+                                    <canvas id="deptTrendChart"></canvas>
+                                </div>
+                            </div>
+                            <div class="p-4 bg-slate-50 dark:bg-slate-800/30 rounded-2xl border border-slate-200/50 dark:border-slate-800">
+                                <h5 class="text-xs font-extrabold text-slate-400 uppercase tracking-widest mb-4">나의 컴퓨터/AI 핵심 역량 레이더 (자가분석)</h5>
+                                <div class="relative h-[250px] w-full">
+                                    <canvas id="myRadarChart"></canvas>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Sub Content: Preparation Roadmap -->
+                        <div>
+                            <h5 class="font-bold text-lg mb-4 flex items-center gap-2"><i class="fa-solid fa-road text-emerald-500"></i> 학과 진학을 위한 나의 학업 준비 로드맵</h5>
+                            <div class="space-y-3">
+                                <div class="p-4 rounded-xl border border-slate-100 dark:border-slate-800 bg-white dark:bg-slate-900">
+                                    <h6 class="font-bold text-slate-800 dark:text-white flex items-center gap-1.5"><span class="w-2 h-2 rounded-full bg-emerald-500"></span>수학적 기본기 다지기</h6>
+                                    <p class="text-xs text-slate-500 dark:text-slate-400 mt-1">인공지능의 뼈대가 되는 확률과 통계, 선형대수 기본 개념 공부를 위해 교내 고급수학 공동교육과정을 이수 중입니다.</p>
+                                </div>
+                                <div class="p-4 rounded-xl border border-slate-100 dark:border-slate-800 bg-white dark:bg-slate-900">
+                                    <h6 class="font-bold text-slate-800 dark:text-white flex items-center gap-1.5"><span class="w-2 h-2 rounded-full bg-emerald-500"></span>실전 데이터 핸들링 경험</h6>
+                                    <p class="text-xs text-slate-500 dark:text-slate-400 mt-1">Kaggle 데이터셋 및 공공 API를 활용하여 실제 기후 변화와 교통량 데이터를 전처리해 보는 개인 연구 세션을 진행하고 있습니다.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                `;
+                // Build charts after modal contents are rendered
+                setTimeout(() => {
+                    rebuildDeptCharts();
+                }, 150);
+            }
+
+            // Animate Modal Open
+            backdrop.classList.remove('hidden');
+            setTimeout(() => {
+                container.classList.remove('scale-95', 'opacity-0');
+                container.classList.add('scale-100', 'opacity-100');
+            }, 50);
+        }
+
+        function closeModal() {
+            const backdrop = document.getElementById('modalBackdrop');
+            const container = document.getElementById('modalContainer');
+
+            // Restore Scroll
+            document.body.style.overflow = '';
+
+            container.classList.remove('scale-100', 'opacity-100');
+            container.classList.add('scale-95', 'opacity-0');
+            
+            setTimeout(() => {
+                backdrop.classList.add('hidden');
+                // Destroy charts to free memory and prevent leaks
+                destroyCharts();
+            }, 300);
+        }
+
+        // Safely destroy chart instances
+        function destroyCharts() {
+            if (activeChart1) { activeChart1.destroy(); activeChart1 = null; }
+            if (activeChart2) { activeChart2.destroy(); activeChart2 = null; }
+            if (activeChart3) { activeChart3.destroy(); activeChart3 = null; }
+            if (activeChart4) { activeChart4.destroy(); activeChart4 = null; }
+        }
+
+        // Chart.js - Render Busan Admission Charts
+        function rebuildBusanCharts() {
+            // Destroy if already exists
+            if (activeChart1) activeChart1.destroy();
+            if (activeChart2) activeChart2.destroy();
+
+            const isDark = document.documentElement.classList.contains('dark');
+            const textModeColor = isDark ? '#94a3b8' : '#64748b';
+            const gridBorderColor = isDark ? '#334155' : '#e2e8f0';
+
+            // Chart 1: Busan Universities Susi Rates
+            const ctx1 = document.getElementById('busanSusiChart');
+            if (ctx1) {
+                activeChart1 = new Chart(ctx1, {
+                    type: 'bar',
+                    data: {
+                        labels: ['부산대', '부경대', '동아대', '경성대', '동의대'],
+                        datasets: [{
+                            label: '수시 평균 경쟁률 (N:1)',
+                            data: [10.08, 8.70, 6.12, 5.85, 4.90],
+                            backgroundColor: [
+                                'rgba(99, 102, 241, 0.8)',
+                                'rgba(139, 92, 246, 0.8)',
+                                'rgba(59, 130, 246, 0.8)',
+                                'rgba(16, 185, 129, 0.8)',
+                                'rgba(236, 72, 153, 0.8)'
+                            ],
+                            borderColor: [
+                                'rgb(99, 102, 241)',
+                                'rgb(139, 92, 246)',
+                                'rgb(59, 130, 246)',
+                                'rgb(16, 185, 129)',
+                                'rgb(236, 72, 153)'
+                            ],
+                            borderWidth: 1.5,
+                            borderRadius: 6
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        plugins: {
+                            legend: { display: false },
+                        },
+                        scales: {
+                            y: {
+                                grid: { color: gridBorderColor },
+                                ticks: { color: textModeColor }
+                            },
+                            x: {
+                                grid: { display: false },
+                                ticks: { color: textModeColor }
+                            }
+                        }
+                    }
+                });
+            }
+
+            // Chart 2: PNU 3-Year Trend
+            const ctx2 = document.getElementById('busanTrendChart');
+            if (ctx2) {
+                activeChart2 = new Chart(ctx2, {
+                    type: 'line',
+                    data: {
+                        labels: ['2024학년도', '2025학년도', '2026학년도'],
+                        datasets: [
+                            {
+                                label: '수시 전형',
+                                data: [10.81, 10.32, 10.08],
+                                borderColor: '#ef4444',
+                                backgroundColor: 'rgba(239, 68, 68, 0.1)',
+                                fill: true,
+                                tension: 0.3,
+                                borderWidth: 3
+                            },
+                            {
+                                label: '정시 전형',
+                                data: [3.79, 4.20, 4.67],
+                                borderColor: '#3b82f6',
+                                backgroundColor: 'rgba(59, 130, 246, 0.1)',
+                                fill: true,
+                                tension: 0.3,
+                                borderWidth: 3
+                            }
+                        ]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        plugins: {
+                            legend: {
+                                labels: { color: textModeColor }
+                            }
+                        },
+                        scales: {
+                            y: {
+                                grid: { color: gridBorderColor },
+                                ticks: { color: textModeColor }
+                            },
+                            x: {
+                                grid: { display: false },
+                                ticks: { color: textModeColor }
+                            }
+                        }
+                    }
+                });
+            }
+        }
+
+        // Chart.js - Render Department Analysis Charts
+        function rebuildDeptCharts() {
+            if (activeChart3) activeChart3.destroy();
+            if (activeChart4) activeChart4.destroy();
+
+            const isDark = document.documentElement.classList.contains('dark');
+            const textModeColor = isDark ? '#94a3b8' : '#64748b';
+            const gridBorderColor = isDark ? '#334155' : '#e2e8f0';
+
+            // Chart 3: AI vs Regular SW Competitiveness trend
+            const ctx3 = document.getElementById('deptTrendChart');
+            if (ctx3) {
+                activeChart3 = new Chart(ctx3, {
+                    type: 'line',
+                    data: {
+                        labels: ['24학년도', '25학년도', '26학년도'],
+                        datasets: [
+                            {
+                                label: '인공지능 전공 (평균)',
+                                data: [11.2, 14.5, 18.2],
+                                borderColor: '#10b981',
+                                borderDash: [2, 2],
+                                tension: 0.1,
+                                borderWidth: 3
+                            },
+                            {
+                                label: '컴퓨터/소프트웨어 (평균)',
+                                data: [9.8, 11.2, 13.5],
+                                borderColor: '#6366f1',
+                                tension: 0.1,
+                                borderWidth: 3
+                            }
+                        ]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        plugins: {
+                            legend: { labels: { color: textModeColor } }
+                        },
+                        scales: {
+                            y: {
+                                grid: { color: gridBorderColor },
+                                ticks: { color: textModeColor }
+                            },
+                            x: {
+                                grid: { display: false },
+                                ticks: { color: textModeColor }
+                            }
+                        }
+                    }
+                });
+            }
+
+            // Chart 4: Radar Chart for Personal Capabilities
+            const ctx4 = document.getElementById('myRadarChart');
+            if (ctx4) {
+                activeChart4 = new Chart(ctx4, {
+                    type: 'radar',
+                    data: {
+                        labels: ['수학적 탐구', '코딩 구현', '데이터 시각화', '협업/커뮤니케이션', '도메인 연구(입시/교육)'],
+                        datasets: [{
+                            label: '나의 현재 준비도',
+                            data: [80, 75, 90, 85, 95],
+                            backgroundColor: 'rgba(16, 185, 129, 0.2)',
+                            borderColor: '#10b981',
+                            pointBackgroundColor: '#10b981',
+                            borderWidth: 2
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        plugins: {
+                            legend: { display: false }
+                        },
+                        scales: {
+                            r: {
+                                angleLines: { color: gridBorderColor },
+                                grid: { color: gridBorderColor },
+                                pointLabels: {
+                                    color: textModeColor,
+                                    font: { size: 10, weight: 'bold' }
+                                },
+                                ticks: {
+                                    display: false,
+                                    maxTicksLimit: 5
+                                },
+                                min: 0,
+                                max: 100
+                            }
+                        }
+                    }
+                });
+            }
+        }
+
+        // Close Modal on clicking backdrop
+        document.getElementById('modalBackdrop').addEventListener('click', function(e) {
+            if (e.target === this) closeModal();
+        });
+
+        // Initialize App
+        window.onload = function() {
+            // Initialization logic simplified
+        }
+    </script>
+</body>
+</html>
